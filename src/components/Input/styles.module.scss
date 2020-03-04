@@ -7,11 +7,11 @@
     width: 100%;
     padding: 6px;
     line-height: 20px;
+    z-index: 2;
+    display: block;
+    position: relative;
 
     a {
-      z-index: 2;
-      display: block;
-      position: relative;
       color: #5b67f9;
     }
   }
@@ -26,7 +26,7 @@
 
   .buffer {
     display: flex;
-    padding: 12px 0;
+    padding: 6px;
     align-items: center;
   }
 
