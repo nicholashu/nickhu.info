@@ -34,7 +34,9 @@ const Input = () => {
     <div className={styles.window}>
       <input onChange={appendString} ref={inputRef} value={buffer}/>
       {history.map((hi: string) => (
-        <div key={`${hi}${Math.random().toString(36)}`} className={styles.line}>{hi}</div>
+        hi.split('\n').map((line: string) => (
+          <div key={`${hi}${Math.random().toString(36)}`} className={styles.line}>{line}</div>
+        ))
       ))}
       <div className={styles.buffer}>
         > {buffer}
