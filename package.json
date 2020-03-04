@@ -33,6 +33,7 @@
     "react-helmet": "^5.2.0",
     "react-modal": "^3.10.1",
     "react-multi-carousel": "^2.5.0",
+    "react-use": "^13.27.0",
     "scroll-into-view": "^1.9.5"
   },
   "devDependencies": {
@@ -60,12 +61,5 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
-  },
-  "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
   }
 }

@@ -32,46 +32,12 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        name: 'documents',
-        path: `${__dirname}/src/documents`,
-      },
-    },
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        name: 'siteData',
-        path: `src/_siteData`,
-      },
-    },
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        name: '_rates',
-        path: `src/_rates`,
-      },
-    },
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        name: '_gallery',
-        path: `src/_gallery`,
-      },
-    },
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        name: '_wecare',
-        path: `src/_wecare`,
-      },
-    },
-    {
       resolve: 'gatsby-plugin-root-import',
       options: {
         src: path.join(__dirname, 'src'),
         pages: path.join(__dirname, 'src/pages'),
         components: path.join(__dirname, 'src/components'),
+        hooks: path.join(__dirname, 'src/hooks'),
         styles: path.join(__dirname, 'src/styles'),
         images: path.join(__dirname, 'src/images'),
       },
@@ -87,7 +53,6 @@ module.exports = {
         background_color: '#663399',
         theme_color: '#663399',
         display: 'minimal-ui',
-        icon: 'src/images/gatsby-icon.png', // This path is relative to the root of the site.
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
