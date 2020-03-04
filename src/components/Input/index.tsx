@@ -21,7 +21,7 @@ const Input = () => {
       newHistory = [...newHistory, getContent(buffer)];
       setHistory(newHistory);
     }
-    if (functions.includes(buffer.split(' ')[0])) {
+    if (functions.includes(buffer.split(' ')[0].toLowerCase())) {
       const main = document.getElementById('main')!;
       switch(buffer.split(' ')[0].toLowerCase()) {
         case 'background':
