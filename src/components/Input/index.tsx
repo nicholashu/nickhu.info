@@ -7,8 +7,9 @@ import styles from './styles.module.scss';
 const Input = () => {
   const [history, setHistory] = useState(['Welcome to https://nickhu.info! type HELP for more info']);
   const [buffer, setBuffer] = useState('');
+  const [style, setStyle] = useState();
   const inputRef = useRef(null);
-
+  const functions = ['background', 'text', 'reset'];
   const appendString = (e: React.ChangeEvent<HTMLInputElement>) => {
     setBuffer(e.target.value);
   }
@@ -20,6 +21,24 @@ const Input = () => {
       newHistory = [...newHistory, getContent(buffer)];
       setHistory(newHistory);
     }
+    if (functions.includes(buffer.split(' ')[0])) {
+      const main = document.getElementById('main')!;
+      switch(buffer.split(' ')[0]) {
+        case 'background':
+           main.style.backgroundColor = buffer.split(' ')[1];
+          break;
+        case 'text':
+          setStyle({ 'color': buffer.split(' ')[1] });
+          break;
+        case 'reset':
+          setStyle({});
+          main.style.backgroundColor = 'black';
+          setHistory(['Welcome to https://nickhu.info! type HELP for more info']);
+          setBuffer('');
+        default:
+          break;
+      }
+    }
     setBuffer('');
   }
 
@@ -29,9 +48,8 @@ const Input = () => {
   }
 
   useKeyPressEvent('Enter', saveLine);
-
   return (
-    <div className={styles.window}>
+    <div className={styles.window} style={style}>
       <input onChange={appendString} ref={inputRef} value={buffer}/>
       {history.map((hi: string) => (
         hi.split('\n').map((line: string) => (

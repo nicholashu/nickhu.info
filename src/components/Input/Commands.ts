@@ -5,7 +5,10 @@ const content = {
     version: Print out the current version\n
     bio: Learn more about me\n
     contact: See how to contact the me\n
-    examples: Discover what else I have made
+    examples: Discover what else I have made\n
+    background: change the background colour e.g., background orange\n
+    text: change the text colour e.g., text black,
+    reset: start all over
     `,
   version: '1.0.0',
   bio: `Hi! :D i‘m Nick Hu. I am a web developer based in the picturesque Perth, Western Australia.\n
