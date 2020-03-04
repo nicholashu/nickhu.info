@@ -23,7 +23,7 @@ const Input = () => {
     }
     if (functions.includes(buffer.split(' ')[0])) {
       const main = document.getElementById('main')!;
-      switch(buffer.split(' ')[0]) {
+      switch(buffer.split(' ')[0].toLowerCase()) {
         case 'background':
            main.style.backgroundColor = buffer.split(' ')[1];
           break;
