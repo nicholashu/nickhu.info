@@ -1,0 +1,42 @@
+@import '~styles/variables.scss';
+
+$hamburger-layer-color: white;
+$hamburger-layer-width: 32px;
+$hamburger-hover-opacity: 1;
+
+:global {
+  @import '~hamburgers/_sass/hamburgers/hamburgers.scss';
+
+  .hamburger {
+    padding: 10px;
+    border-radius: 6px;
+    z-index: 11;
+
+    @include gt-mobile {
+      display: none;
+    }
+
+    // https://github.com/jonsuh/hamburgers/blob/master/_sass/hamburgers/types/_3dy.scss#L10
+    .hamburger-inner {
+      &, &::after, &::before {
+        transition: transform 0.15s cubic-bezier(0.645, 0.045, 0.355, 1),
+          background-color 0s 0.1s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+        &::before,
+        &::after {
+          transition: transform 0s 0.1s cubic-bezier(0.645, 0.045, 0.355, 1),
+            background-color 0s 0.1s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+      }
+    }
+
+    &.is-active {
+      .hamburger-inner {
+        &::after,
+        &::before {
+          background-color: white;
+        }
+      }
+    }
+  }
+}

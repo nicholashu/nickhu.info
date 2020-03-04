@@ -1,0 +1,71 @@
+{
+  "name": "nickhu.info",
+  "private": true,
+  "description": "",
+  "version": "1.0.0",
+  "author": "Nick Hu <nick@nickhu.info>",
+  "dependencies": {
+    "classcat": "^3.2.5",
+    "gatsby": "^2.2.5",
+    "gatsby-cli": "^2.4.17",
+    "gatsby-image": "^2.0.34",
+    "gatsby-plugin-flow": "^1.0.4",
+    "gatsby-plugin-manifest": "^2.0.24",
+    "gatsby-plugin-netlify-cms": "^3.0.16",
+    "gatsby-plugin-offline": "^2.0.25",
+    "gatsby-plugin-polyfill-io": "^1.1.0",
+    "gatsby-plugin-react-helmet": "^3.0.10",
+    "gatsby-plugin-root-import": "^2.0.5",
+    "gatsby-plugin-sass": "^2.0.11",
+    "gatsby-plugin-sharp": "^2.0.30",
+    "gatsby-plugin-typescript": "^2.1.23",
+    "gatsby-source-filesystem": "^2.0.27",
+    "gatsby-transformer-remark": "^2.5.0",
+    "gatsby-transformer-sharp": "^2.1.17",
+    "hamburgers": "^1.1.3",
+    "netlify-cms": "^2.8.0",
+    "node-sass": "^4.11.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.4",
+    "react-animate-height": "^2.0.15",
+    "react-day-picker": "^7.3.2",
+    "react-dom": "^16.8.4",
+    "react-helmet": "^5.2.0",
+    "react-modal": "^3.10.1",
+    "react-multi-carousel": "^2.5.0",
+    "scroll-into-view": "^1.9.5"
+  },
+  "devDependencies": {
+    "@types/node": "^13.1.0",
+    "@types/react": "^16.9.17",
+    "@types/react-dom": "^16.9.4",
+    "@types/react-helmet": "^5.0.14",
+    "@types/react-modal": "^3.8.3",
+    "@types/scroll-into-view": "^1.6.7",
+    "gatsby-plugin-stylelint": "^3.2.0",
+    "prettier": "^1.16.4",
+    "stylelint": "^9.10.1",
+    "stylelint-config-standard": "^18.2.0",
+    "stylelint-scss": "^3.5.4",
+    "stylelint-webpack-plugin": "^0.10.5"
+  },
+  "keywords": [
+    "gatsby"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop -p 8080",
+    "format": "prettier --write src/**/*.{ts,tsx}",
+    "start": "npm run develop",
+    "serve": "gatsby serve",
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+  },
+  "bugs": {
+    "url": "https://github.com/gatsbyjs/gatsby/issues"
+  }
+}
