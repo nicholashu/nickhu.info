@@ -40,17 +40,13 @@ const Input = () => {
       }
     }
     setBuffer('');
-  }
-
-  if (inputRef && inputRef.current) {
-    // @ts-ignore
-    inputRef.current.focus();
+    window.scrollTo(0, document.body.scrollHeight);
   }
 
   useKeyPressEvent('Enter', saveLine);
   return (
     <div className={styles.window} style={style}>
-      <input onChange={appendString} ref={inputRef} value={buffer}/>
+      <input onChange={appendString} ref={inputRef} value={buffer} autoFocus/>
       {history.map((hi: string) => (
         hi.split('\n').map((line: string) => (
           <div key={`${hi}${Math.random().toString(36)}`} className={styles.line}>
