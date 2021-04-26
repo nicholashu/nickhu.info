@@ -4,13 +4,13 @@ const content = {
     USAGE:\n
     version: Print out the current version\n
     bio: Learn more about me\n
-    contact: See how to contact the me\n
+    contact: See how to contact me\n
     examples: Discover what else I have made\n
     background: change the background colour e.g., type background orange\n
     text: change the text colour e.g., type text black\n
     reset: start all over
     `,
-  version: '1.0.0',
+  version: '1.0.3',
   bio: `Hi! :D i‘m Nick Hu. I am a web developer based in the picturesque Perth, Western Australia.\n
     I like to create beautiful web applications both inside and out.\n
     React + Next.js + Craft CMS + GraphQL is my main JAM. ;)\n
