@@ -24,7 +24,7 @@
     "gatsby-transformer-sharp": "^2.1.17",
     "hamburgers": "^1.1.3",
     "netlify-cms": "^2.8.0",
-    "node-sass": "^4.11.0",
+    "node-sass": "^7.0.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.4",
     "react-animate-height": "^2.0.15",
