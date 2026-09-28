@@ -1,16 +1,4 @@
 {
-  "endOfLine": "lf",
-  "semi": false,
-  "singleQuote": false,
-  "tabWidth": 2,
-  "trailingComma": "es5"
-  "stylelintIntegration": true
-  "overrides": [
-        {
-            "files": "*.scss",
-            "options": {
-                "tabeWidth": 1
-            }
-        }
-    ],
+  "singleQuote": true,
+  "trailingComma": "all"
 }
