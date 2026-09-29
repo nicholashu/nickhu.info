@@ -31,11 +31,10 @@ const recentProjects = [
   },
 
   {
-    name: 'Museums of History NSW',
-    context: ' & CSIRO · Airteam',
-    href: 'https://mhnsw.au',
+    name: 'Digital Member Services (DMS)',
+    context: ' · Airteam',
     description:
-      'Built accessible web applications, content tools and complex forms, and connected them to external services.',
+      'Worked on Digital Member Services, a platform used by multiple health funds for their member websites and mobile apps. Members can submit claims, check benefit limits, make payments and manage their cover.',
   },
   {
     name: 'News Corp',
