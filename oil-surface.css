@@ -1,0 +1,32 @@
+/* The same iridescent material runs behind every chapter. */
+.oil-surface {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  contain: strict;
+  background: #a1a1a1;
+}
+.oil-surface::before {
+  content: "";
+  position: absolute;
+  inset: -12%;
+  background:
+    radial-gradient(ellipse at 78% 18%, #809971 8%, #859280de 20%, #948aa582 27%, #7f84987d 32%, transparent 44%),
+    radial-gradient(ellipse at 16% 78%, #859280ee 10%, #859280d9 24%, #948aa578 30%, transparent 43%),
+    radial-gradient(ellipse at 83% 68%, #a1997770 5%, #7f849890 13%, transparent 28%),
+    #a1a1a1;
+  filter: blur(13px);
+}
+.oil-surface canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+.oil-surface[data-renderer="webgl"] canvas,
+.oil-surface[data-renderer="canvas2d"] canvas { opacity: 1; }
+@media print { .oil-surface { display: none; } }

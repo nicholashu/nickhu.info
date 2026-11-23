@@ -1,27 +1,335 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#101110" />
-    <meta
-      name="description"
-      content="Hi, I’m Nick Hu. I build things for the web from Perth, co-founded KURB, and work at Airteam. Explore my work through this little terminal."
-    />
-    <title>Nick Hu · Developer in Perth</title>
-    <link
-      rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23101310'/%3E%3Ctext x='9' y='43' font-family='monospace' font-size='34' fill='%23bcf78c'%3E%3E_%3C/text%3E%3C/svg%3E"
-    />
-  </head>
-  <body>
-    <div id="root"></div>
-    <noscript
-      >Hi, I'm Nick Hu, a senior product engineer and Co-Founder &amp; CTO of
-      KURB, based in Perth, Western Australia. Contact me at nick@nickhu.info or
-      visit github.com/nicholashu. Enable JavaScript to explore the interactive
-      portfolio.</noscript
-    >
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<!DOCTYPE html><html lang="en-AU"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#a1a1a1">
+  <title>Nick Hu | Senior Software Engineer &amp; Applied AI, Perth</title>
+  <meta name="description" content="Senior software engineer at Airteam and co-founder of KURB, based in Perth. Selected work in search infrastructure, AI resources and coding agent workflows.">
+  <meta name="author" content="Nick Hu">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://nickhu.info/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Nick Hu">
+  <meta property="og:locale" content="en_AU">
+  <meta property="og:url" content="https://nickhu.info/">
+  <meta property="og:title" content="Nick Hu | Senior Software Engineer &amp; Applied AI, Perth">
+  <meta property="og:description" content="Senior software engineer at Airteam and co-founder of KURB, based in Perth. Selected work in search infrastructure, AI resources and coding agent workflows.">
+  <meta property="og:image" content="https://nickhu.info/assets/nick-hu-social.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Nick Hu’s halftone portrait beside Software &amp; applied AI. Senior software engineer in Perth.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Nick Hu | Senior Software Engineer &amp; Applied AI, Perth">
+  <meta name="twitter:description" content="Senior software engineer at Airteam and co-founder of KURB, based in Perth. Selected work in search infrastructure, AI resources and coding agent workflows.">
+  <meta name="twitter:image" content="https://nickhu.info/assets/nick-hu-social.jpg">
+  <meta name="twitter:image:alt" content="Nick Hu’s halftone portrait beside Software &amp; applied AI. Senior software engineer in Perth.">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://nickhu.info/#website",
+        "url": "https://nickhu.info/",
+        "name": "Nick Hu",
+        "inLanguage": "en-AU",
+        "publisher": { "@id": "https://nickhu.info/#person" }
+      },
+      {
+        "@type": "ProfilePage",
+        "@id": "https://nickhu.info/#profile",
+        "url": "https://nickhu.info/",
+        "name": "Nick Hu | Senior Software Engineer & Applied AI, Perth",
+        "description": "Senior software engineer at Airteam and co-founder of KURB, based in Perth. Selected work in search infrastructure, AI resources and coding agent workflows.",
+        "inLanguage": "en-AU",
+        "isPartOf": { "@id": "https://nickhu.info/#website" },
+        "mainEntity": { "@id": "https://nickhu.info/#person" },
+        "primaryImageOfPage": {
+          "@type": "ImageObject",
+          "url": "https://nickhu.info/assets/nick-hu-social.jpg",
+          "width": 1200,
+          "height": 630
+        }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://nickhu.info/#person",
+        "name": "Nick Hu",
+        "url": "https://nickhu.info/",
+        "description": "Senior software engineer at Airteam and co-founder and CTO of KURB, based in Perth, Western Australia.",
+        "jobTitle": "Senior Software Engineer",
+        "worksFor": { "@type": "Organization", "name": "Airteam", "url": "https://airteam.com.au/" },
+        "affiliation": { "@type": "Organization", "name": "KURB", "url": "https://kurb.online/" },
+        "homeLocation": { "@type": "Place", "name": "Perth, Western Australia" },
+        "sameAs": [
+          "https://github.com/nicholashu",
+          "https://www.linkedin.com/in/nick-hu-perth/"
+        ]
+      }
+    ]
+  }
+  </script>
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link rel="preload" href="./assets/fonts/instrument-sans-latin-variable.woff2" as="font" type="font/woff2" crossorigin="">
+  <link rel="stylesheet" href="./portfolio.css">
+  <link rel="stylesheet" href="./oil-surface.css">
+  <script src="./project-browser.js" type="module"></script>
+  <script src="./main.js" defer=""></script>
+  <script src="./bot-gallery.js" defer=""></script>
+  <script src="./oil-surface.js" type="module"></script>
+</head>
+<body>
+  <div class="oil-surface" aria-hidden="true" data-renderer="static"><canvas id="oil-surface-canvas"></canvas></div>
+  <a class="skip-link" href="#work">Skip to the work</a>
+  <div class="page-shell" id="top">
+    <header class="masthead">
+      <span class="wordmark">Nick Hu.</span>
+      <nav aria-label="Main navigation"><a href="#contact">Contact <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"></path></svg></a></nav>
+    </header>
+    <main>
+      <section class="intro" aria-labelledby="intro-title">
+        <h1 id="intro-title">Software &amp;<br>applied AI.</h1>
+        <div class="intro-person">
+          <div class="portrait-frame"><img src="./assets/nick-linkedin-avatar-source.png" alt="Nick Hu’s halftone portrait" width="694" height="1536" fetchpriority="high"></div>
+          <p>Senior software engineer, Airteam.<br>Co-founder &amp; CTO, KURB.<br><span>Perth, Western Australia.</span></p>
+        </div>
+      </section>
+      <section class="work-browser" id="work" aria-label="Selected work">
+        <aside class="project-index">
+          <h2>Selected work</h2>
+          <div class="project-tabs" data-project-tabs="" role="tablist" aria-label="Selected projects" aria-orientation="horizontal">
+            <a class="project-tab" href="#kurb" data-project-tab="kurb" id="tab-kurb" role="tab" aria-controls="kurb" aria-selected="true" tabindex="0"><span class="project-name">Fashion search</span><span class="project-category">KURB</span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"></path></svg></a>
+            <a class="project-tab" href="#creaitor" data-project-tab="creaitor" id="tab-creaitor" role="tab" aria-controls="creaitor" aria-selected="false" tabindex="-1"><span class="project-name">AI learning resources</span><span class="project-category">CreAItor</span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"></path></svg></a>
+            <a class="project-tab" href="#agents" data-project-tab="agents" id="tab-agents" role="tab" aria-controls="agents" aria-selected="false" tabindex="-1"><span class="project-name">Designer-first</span><span class="project-category">Coding agent workflow</span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"></path></svg></a>
+          </div>
+          <div class="index-note"><p>Search infrastructure.<br>AI generation and evaluation.<br>Tools for coding agents.</p></div>
+        </aside>
+        <div class="project-panels">
+          <article class="project-panel scene-enhanced" id="kurb" data-project-panel="" aria-labelledby="tab-kurb" role="tabpanel" data-kurb-animating="false" data-kurb-view="product">
+            <div class="preview-toolbar"><h3 id="kurb-title">KURB</h3><div class="view-switch" aria-label="KURB preview" data-enhance-only=""><button type="button" data-kurb-view="product" aria-pressed="true">Product</button><button type="button" data-kurb-view="collection" aria-pressed="false">Collection</button><button type="button" data-kurb-view="similarity" aria-pressed="false">Similarity</button></div></div>
+            <div class="preview-stage kurb-visual">
+              <svg class="kurb-diagram" viewBox="0 0 1100 720" fill="none" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" style="opacity: 0;">
+<defs>
+            <clipPath id="kurb-garment-clip"><rect width="134" height="178" rx="7"></rect></clipPath>
+            <clipPath id="kurb-catalogue-clip"><rect x="-180" y="-101" width="360" height="201.025"></rect></clipPath>
+            <g id="kurb-cream-trousers">
+              <rect width="134" height="178" rx="7" fill="#f7f7f2"></rect>
+              <g clip-path="url(#kurb-garment-clip)"><image href="./assets/kurb-live-search.jpg" x="-151.92" y="-87.48" width="581.66" height="399.46"></image></g>
+            </g>
+            <g id="kurb-black-trousers">
+              <rect width="134" height="178" rx="7" fill="#f7f7f2"></rect>
+              <g clip-path="url(#kurb-garment-clip)"><image href="./assets/kurb-live-search.jpg" x="-293.18" y="-87.48" width="581.66" height="399.46"></image></g>
+            </g>
+            <g id="kurb-black-jacket">
+              <rect width="134" height="178" rx="7" fill="#f7f7f2"></rect>
+              <g clip-path="url(#kurb-garment-clip)"><image href="./assets/kurb-live-search.jpg" x="-434.43" y="-87.48" width="581.66" height="399.46"></image></g>
+            </g>
+          </defs>
+<g class="kurb-collection">
+  <g class="kurb-source-cloud"><rect x="294" y="95" width="12" height="10" rx="2"></rect><circle cx="298" cy="99" r="1.3"></circle><rect x="322" y="95" width="12" height="10" rx="2"></rect><circle cx="326" cy="99" r="1.3"></circle><rect x="350" y="95" width="12" height="10" rx="2"></rect><circle cx="354" cy="99" r="1.3"></circle><rect x="294" y="175" width="12" height="10" rx="2"></rect><circle cx="298" cy="179" r="1.3"></circle><rect x="322" y="175" width="12" height="10" rx="2"></rect><circle cx="326" cy="179" r="1.3"></circle><rect x="350" y="175" width="12" height="10" rx="2"></rect><circle cx="354" cy="179" r="1.3"></circle><rect x="294" y="255" width="12" height="10" rx="2"></rect><circle cx="298" cy="259" r="1.3"></circle><rect x="322" y="255" width="12" height="10" rx="2"></rect><circle cx="326" cy="259" r="1.3"></circle><rect x="350" y="255" width="12" height="10" rx="2"></rect><circle cx="354" cy="259" r="1.3"></circle><rect x="294" y="335" width="12" height="10" rx="2"></rect><circle cx="298" cy="339" r="1.3"></circle><rect x="322" y="335" width="12" height="10" rx="2"></rect><circle cx="326" cy="339" r="1.3"></circle><rect x="350" y="335" width="12" height="10" rx="2"></rect><circle cx="354" cy="339" r="1.3"></circle><rect x="294" y="415" width="12" height="10" rx="2"></rect><circle cx="298" cy="419" r="1.3"></circle><rect x="322" y="415" width="12" height="10" rx="2"></rect><circle cx="326" cy="419" r="1.3"></circle><rect x="350" y="415" width="12" height="10" rx="2"></rect><circle cx="354" cy="419" r="1.3"></circle><rect x="294" y="495" width="12" height="10" rx="2"></rect><circle cx="298" cy="499" r="1.3"></circle><rect x="322" y="495" width="12" height="10" rx="2"></rect><circle cx="326" cy="499" r="1.3"></circle><rect x="350" y="495" width="12" height="10" rx="2"></rect><circle cx="354" cy="499" r="1.3"></circle><rect x="794" y="95" width="12" height="10" rx="2"></rect><circle cx="798" cy="99" r="1.3"></circle><rect x="766" y="95" width="12" height="10" rx="2"></rect><circle cx="770" cy="99" r="1.3"></circle><rect x="738" y="95" width="12" height="10" rx="2"></rect><circle cx="742" cy="99" r="1.3"></circle><rect x="794" y="175" width="12" height="10" rx="2"></rect><circle cx="798" cy="179" r="1.3"></circle><rect x="766" y="175" width="12" height="10" rx="2"></rect><circle cx="770" cy="179" r="1.3"></circle><rect x="738" y="175" width="12" height="10" rx="2"></rect><circle cx="742" cy="179" r="1.3"></circle><rect x="794" y="255" width="12" height="10" rx="2"></rect><circle cx="798" cy="259" r="1.3"></circle><rect x="766" y="255" width="12" height="10" rx="2"></rect><circle cx="770" cy="259" r="1.3"></circle><rect x="738" y="255" width="12" height="10" rx="2"></rect><circle cx="742" cy="259" r="1.3"></circle><rect x="794" y="335" width="12" height="10" rx="2"></rect><circle cx="798" cy="339" r="1.3"></circle><rect x="766" y="335" width="12" height="10" rx="2"></rect><circle cx="770" cy="339" r="1.3"></circle><rect x="738" y="335" width="12" height="10" rx="2"></rect><circle cx="742" cy="339" r="1.3"></circle><rect x="794" y="415" width="12" height="10" rx="2"></rect><circle cx="798" cy="419" r="1.3"></circle><rect x="766" y="415" width="12" height="10" rx="2"></rect><circle cx="770" cy="419" r="1.3"></circle><rect x="738" y="415" width="12" height="10" rx="2"></rect><circle cx="742" cy="419" r="1.3"></circle><rect x="794" y="495" width="12" height="10" rx="2"></rect><circle cx="798" cy="499" r="1.3"></circle><rect x="766" y="495" width="12" height="10" rx="2"></rect><circle cx="770" cy="499" r="1.3"></circle><rect x="738" y="495" width="12" height="10" rx="2"></rect><circle cx="742" cy="499" r="1.3"></circle></g>
+  <g class="kurb-flow-lines" stroke-width="2.5"><g opacity=".22"><path d="M268 85 C310 85 310 310 370 310"></path><path d="M268 161 C310 161 310 310 370 310"></path><path d="M268 237 C310 237 310 310 370 310"></path><path d="M268 313 C310 313 310 310 370 310"></path><path d="M268 389 C310 389 310 310 370 310"></path><path d="M268 465 C310 465 310 310 370 310"></path><path d="M832 85 C790 85 790 310 730 310"></path><path d="M832 161 C790 161 790 310 730 310"></path><path d="M832 237 C790 237 790 310 730 310"></path><path d="M832 313 C790 313 790 310 730 310"></path><path d="M832 389 C790 389 790 310 730 310"></path><path d="M832 465 C790 465 790 310 730 310"></path></g><path data-flow-path="0" pathLength="1" d="M268 85 C310 85 310 310 370 310" style="stroke-dasharray: 1;"></path><path data-flow-path="1" pathLength="1" d="M268 161 C310 161 310 310 370 310" style="stroke-dasharray: 1;"></path><path data-flow-path="2" pathLength="1" d="M268 237 C310 237 310 310 370 310" style="stroke-dasharray: 1;"></path><path data-flow-path="3" pathLength="1" d="M268 313 C310 313 310 310 370 310" style="stroke-dasharray: 1;"></path><path data-flow-path="4" pathLength="1" d="M268 389 C310 389 310 310 370 310" style="stroke-dasharray: 1;"></path><path data-flow-path="5" pathLength="1" d="M268 465 C310 465 310 310 370 310" style="stroke-dasharray: 1;"></path><path data-flow-path="6" pathLength="1" d="M832 85 C790 85 790 310 730 310" style="stroke-dasharray: 1;"></path><path data-flow-path="7" pathLength="1" d="M832 161 C790 161 790 310 730 310" style="stroke-dasharray: 1;"></path><path data-flow-path="8" pathLength="1" d="M832 237 C790 237 790 310 730 310" style="stroke-dasharray: 1;"></path><path data-flow-path="9" pathLength="1" d="M832 313 C790 313 790 310 730 310" style="stroke-dasharray: 1;"></path><path data-flow-path="10" pathLength="1" d="M832 389 C790 389 790 310 730 310" style="stroke-dasharray: 1;"></path><path data-flow-path="11" pathLength="1" d="M832 465 C790 465 790 310 730 310" style="stroke-dasharray: 1;"></path></g>
+  <g class="kurb-sources"><g transform="translate(48 56)"><rect width="220" height="58" rx="10"></rect><text x="110" y="39">eBay</text></g><g transform="translate(48 132)"><rect width="220" height="58" rx="10"></rect><text x="110" y="39">Depop</text></g><g transform="translate(48 208)"><rect width="220" height="58" rx="10"></rect><text x="110" y="39">Mercari (JP)</text></g><g transform="translate(48 284)"><rect width="220" height="58" rx="10"></rect><text x="110" y="39">Kindal</text></g><g transform="translate(48 360)"><rect width="220" height="58" rx="10"></rect><text x="110" y="39">HULA</text></g><g transform="translate(48 436)"><rect width="220" height="58" rx="10"></rect><text x="110" y="39">Tradera</text></g><g transform="translate(832 56)"><rect width="220" height="58" rx="10"></rect><text x="110" y="39">Grailed</text></g><g transform="translate(832 132)"><rect width="220" height="58" rx="10"></rect><text x="110" y="39">Vestiaire</text></g><g transform="translate(832 208)"><rect width="220" height="58" rx="10"></rect><text x="110" y="39">Bunjang</text></g><g transform="translate(832 284)"><rect width="220" height="58" rx="10"></rect><text x="110" y="39">Rakuten</text></g><g transform="translate(832 360)"><rect width="220" height="58" rx="10"></rect><text x="110" y="39">ALLU</text></g><g transform="translate(832 436)"><rect width="220" height="58" rx="10"></rect><text x="110" y="39">Feelway</text></g></g>
+  <g class="kurb-catalogue" transform="translate(550 310)">
+    <g class="kurb-catalogue-plane"><g clip-path="url(#kurb-catalogue-clip)"><image href="./assets/kurb-live-search.jpg" x="-311.311475" y="-176.245902" width="502.745902" height="345.245902"></image></g></g>
+  </g>
+  <g class="kurb-garment" data-garment="0"><use href="#kurb-cream-trousers"></use></g><g class="kurb-garment" data-garment="1"><use href="#kurb-black-jacket"></use></g><g class="kurb-garment" data-garment="2"><use href="#kurb-black-trousers"></use></g><g class="kurb-garment" data-garment="3"><use href="#kurb-cream-trousers"></use></g>
+  <g class="kurb-catalogue-label" transform="translate(550 310)"><rect class="kurb-caption-surface" x="-160" y="119" width="320" height="62" rx="13"></rect><text x="0" y="161">The catalogue</text></g>
+  <g class="kurb-vendor-count" transform="translate(550 586)"><rect class="kurb-caption-surface" x="-190" y="-40" width="380" height="80" rx="16"></rect><text class="kurb-vendor-count-inline" x="0" y="13" text-anchor="middle">≈1,000 vendors</text></g>
+</g>
+<g class="kurb-vectors">
+  <g class="kurb-vector-base" stroke-width="2.5" opacity=".2"><path d="M256 270 C330 270 342 295 402 295"></path><path d="M708 295 C776 295 774 185 844 185"></path><path d="M708 295 C776 295 774 430 844 430"></path></g>
+  <g stroke-width="3"><path class="kurb-vector-line" data-vector-path="query" pathLength="1" d="M256 270 C330 270 342 295 402 295" style="stroke-dasharray: 1;"></path><path class="kurb-vector-line" data-vector-path="match-0" pathLength="1" d="M708 295 C776 295 774 185 844 185" style="stroke-dasharray: 1;"></path><path class="kurb-vector-line" data-vector-path="match-1" pathLength="1" d="M708 295 C776 295 774 430 844 430" style="stroke-dasharray: 1;"></path></g>
+  <g class="kurb-query" transform="translate(99 181) rotate(-5 67 89)"><use href="#kurb-black-trousers"></use></g>
+  <g class="kurb-vector-field" transform="translate(555 295)">
+    <circle class="kurb-vector-bound" r="132" stroke-width="2"></circle>
+    <path class="kurb-neighbour-links" pathLength="1" d="M-48 24 4-7 50 20 24 75-48 24M4-7 19-62 81-44 50 20" stroke-width="2" style="stroke-dasharray: 1;"></path>
+    <circle cx="-101" cy="-38" r="9"></circle><circle cx="-88" cy="54" r="7"></circle><circle cx="-58" cy="-85" r="8"></circle><circle cx="-13" cy="-105" r="6"></circle><circle cx="53" cy="-101" r="8"></circle><circle cx="106" cy="-49" r="6"></circle><circle cx="115" cy="18" r="9"></circle><circle cx="72" cy="89" r="7"></circle><circle cx="-25" cy="110" r="8"></circle><circle cx="-87" cy="-2" r="6"></circle>
+    <circle class="kurb-neighbour" cx="-48" cy="24" r="12"></circle><circle class="kurb-neighbour" cx="4" cy="-7" r="15"></circle><circle class="kurb-neighbour" cx="50" cy="20" r="11"></circle><circle class="kurb-neighbour" cx="24" cy="75" r="12"></circle><circle class="kurb-neighbour" cx="19" cy="-62" r="11"></circle><circle class="kurb-neighbour" cx="81" cy="-44" r="10"></circle>
+  </g>
+  <g class="kurb-match" data-match="0" transform="translate(873 96) rotate(5 67 89)"><use href="#kurb-black-trousers"></use></g>
+  <g class="kurb-match" data-match="1" transform="translate(873 341) rotate(-5 67 89)"><use href="#kurb-cream-trousers"></use></g>
+  <g class="kurb-query-caption"><rect class="kurb-caption-surface" x="58" y="398" width="216" height="64" rx="13"></rect><text class="kurb-vector-label" x="166" y="440" text-anchor="middle">Query image</text></g>
+  <g class="kurb-embedding-caption"><rect class="kurb-caption-surface" x="320" y="493" width="470" height="120" rx="16"></rect><text class="kurb-vector-label" x="555" y="539" text-anchor="middle">Image embeddings</text><text class="kurb-vector-sub" x="555" y="580" text-anchor="middle">Visual similarity in vector space</text></g>
+</g>
+</svg>
+              <figure class="kurb-result" aria-hidden="false" style="opacity: 1; transform: none; pointer-events: auto;">
+                <a class="image-link" href="./assets/kurb-product-clean.jpg" data-lightbox="" data-caption="KURB's live search interface, captured November 2026." aria-label="Enlarge the KURB search screenshot" tabindex="0"><img src="./assets/kurb-product-clean.jpg" alt="KURB fashion search with Rick Owens garments and brand, price and vendor filters." width="1363" height="936" fetchpriority="high"><span class="image-enlarge">Enlarge</span></a>
+              </figure>
+            </div>
+            <p class="preview-caption" data-kurb-caption="">KURB's live search interface, captured November 2026.</p>
+            <div class="project-description">
+              <div class="project-facts" aria-label="KURB scale"><p><strong>≈1,000</strong><span>vendors</span></p><p><strong>4M</strong><span>items processed / day</span></p><p><strong>100K</strong><span>new items / day</span></p></div>
+              <h4>Second-hand fashion, across catalogues.</h4>
+              <p>Collection and search infrastructure for discovering second-hand and archival fashion. Vendor listings are normalised, images processed and garments connected through text search, image similarity and recommendations.</p>
+              <div class="project-footer"><span>Co-founder &amp; CTO · KURB</span><a href="https://kurb.online/search">Explore KURB</a></div>
+              <details class="project-details"><summary>Technical details <svg class="disclosure-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></summary><div class="detail-copy"><h5>Collection at scale</h5><p>Collection systems convert different vendor formats into a consistent catalogue. The daily figures describe processing volume and new listings, rather than active inventory.</p><h5>Image similarity</h5><p>Image embeddings represent the appearance of garments. Vector search compares those representations across vendors to retrieve visually similar pieces for image search and product recommendations.</p><a class="text-link" href="https://apps.apple.com/au/app/kurb-online/id6799420196">KURB on the App Store</a></div></details>
+            </div>
+          </article>
+          <article class="project-panel" id="creaitor" data-project-panel="" aria-labelledby="tab-creaitor" role="tabpanel" hidden="">
+            <div class="preview-toolbar"><h3 id="creaitor-title">CreAItor</h3></div>
+            <div class="preview-stage creaitor-visual">
+              <div class="media-view worksheet-stack" data-worksheet-stack="" aria-label="CreAItor resource examples">
+  <div class="worksheet-stack__stage" data-stack-stage="">
+    <ol class="worksheet-stack__list" aria-label="Development resource examples">
+      <li class="worksheet-stack__sheet" data-stack-sheet="" data-resource-format="activity-mat">
+        <a class="worksheet-stack__link" href="./assets/creaitor-clock-output.png" data-lightbox="" data-worksheet-title="Activity mat" data-caption="Activity mat: a CreAItor development resource example." aria-label="Enlarge activity mat" tabindex="0">
+          <img src="./assets/creaitor-clock-output.png" alt="Clock-reading and drawing activities arranged around a central topic." width="1600" height="1132" loading="lazy" decoding="async">
+          <span class="worksheet-stack__enlarge" aria-hidden="true">Enlarge</span>
+        </a>
+      </li>
+      <li class="worksheet-stack__sheet" data-stack-sheet="" data-resource-format="maths-worksheet">
+        <a class="worksheet-stack__link" href="./assets/resource-types/maths-worksheet.jpg" data-lightbox="" data-worksheet-title="Maths worksheet" data-caption="Maths worksheet: a CreAItor development resource example." aria-label="Enlarge maths worksheet" tabindex="-1">
+          <img src="./assets/resource-types/maths-worksheet.jpg" alt="A CreAItor maths worksheet with numbered addition questions in two columns." width="1300" height="920" loading="lazy" decoding="async">
+          <span class="worksheet-stack__enlarge" aria-hidden="true">Enlarge</span>
+        </a>
+      </li>
+      <li class="worksheet-stack__sheet" data-stack-sheet="" data-resource-format="word-study">
+        <a class="worksheet-stack__link" href="./assets/resource-types/word-study.jpg" data-lightbox="" data-worksheet-title="Word study" data-caption="Word study: a CreAItor development resource example." aria-label="Enlarge word study" tabindex="-1">
+          <img src="./assets/resource-types/word-study.jpg" alt="Six word-study activities covering spelling, definitions and sentence writing." width="794" height="1123" loading="lazy" decoding="async">
+          <span class="worksheet-stack__enlarge" aria-hidden="true">Enlarge</span>
+        </a>
+      </li>
+      <li class="worksheet-stack__sheet" data-stack-sheet="" data-resource-format="exit-ticket">
+        <a class="worksheet-stack__link" href="./assets/creaitor-fraction-output.png" data-lightbox="" data-worksheet-title="Exit tickets" data-caption="Exit tickets: a CreAItor development resource example." aria-label="Enlarge exit tickets" tabindex="-1">
+          <img src="./assets/creaitor-fraction-output.png" alt="Four tear-off exit tickets with fraction questions and diagrams." width="1600" height="1132" loading="lazy" decoding="async">
+          <span class="worksheet-stack__enlarge" aria-hidden="true">Enlarge</span>
+        </a>
+      </li>
+      <li class="worksheet-stack__sheet" data-stack-sheet="" data-resource-format="colour-by-numbers">
+        <a class="worksheet-stack__link" href="./assets/resource-types/colour-by-code.jpg" data-lightbox="" data-worksheet-title="Colour by code" data-caption="Colour by code: a development answer key rendered with CreAItor’s original worksheet components." aria-label="Enlarge colour by code" tabindex="-1">
+          <img src="./assets/resource-types/colour-by-code.jpg" alt="Colour-by-code answer key showing a rocket revealed in a coloured grid." width="920" height="1300" loading="lazy" decoding="async">
+          <span class="worksheet-stack__enlarge" aria-hidden="true">Enlarge</span>
+        </a>
+      </li>
+      <li class="worksheet-stack__sheet" data-stack-sheet="" data-resource-format="word-search">
+        <a class="worksheet-stack__link" href="./assets/resource-types/word-search.jpg" data-lightbox="" data-worksheet-title="Word search" data-caption="Word search: a CreAItor development resource example." aria-label="Enlarge word search" tabindex="-1">
+          <img src="./assets/resource-types/word-search.jpg" alt="A plant-vocabulary word search with a word bank and illustration." width="794" height="1123" loading="lazy" decoding="async">
+          <span class="worksheet-stack__enlarge" aria-hidden="true">Enlarge</span>
+        </a>
+      </li>
+      <li class="worksheet-stack__sheet" data-stack-sheet="" data-resource-format="roll-and-write-game">
+        <a class="worksheet-stack__link" href="./assets/resource-types/roll-and-write.jpg" data-lightbox="" data-worksheet-title="Roll &amp; write" data-caption="Roll &amp; write: a CreAItor development resource example." aria-label="Enlarge roll &amp; write" tabindex="-1">
+          <img src="./assets/resource-types/roll-and-write.jpg" alt="A dice game worksheet with six columns of calculations and writing spaces." width="1300" height="920" loading="lazy" decoding="async">
+          <span class="worksheet-stack__enlarge" aria-hidden="true">Enlarge</span>
+        </a>
+      </li>
+      <li class="worksheet-stack__sheet" data-stack-sheet="" data-resource-format="colour-game-board">
+        <a class="worksheet-stack__link" href="./assets/creaitor-gameboard-sentences.jpg" data-lightbox="" data-worksheet-title="Sentence gameboard" data-caption="CreAItor gameboard development example, using the original layout and artwork." aria-label="Enlarge sentence gameboard" tabindex="-1">
+          <img src="./assets/creaitor-gameboard-sentences.jpg" alt="A sentence-reading gameboard with a winding path and Robot Factory artwork." width="1300" height="919" loading="lazy" decoding="async">
+          <span class="worksheet-stack__enlarge" aria-hidden="true">Enlarge</span>
+        </a>
+      </li>
+      <li class="worksheet-stack__sheet" data-stack-sheet="" data-resource-format="crossword">
+        <a class="worksheet-stack__link" href="./assets/resource-types/crossword.jpg" data-lightbox="" data-worksheet-title="Crossword" data-caption="Crossword: a CreAItor development resource example." aria-label="Enlarge crossword" tabindex="-1">
+          <img src="./assets/resource-types/crossword.jpg" alt="A plant-vocabulary crossword with a connected grid and across and down clues." width="794" height="1123" loading="lazy" decoding="async">
+          <span class="worksheet-stack__enlarge" aria-hidden="true">Enlarge</span>
+        </a>
+      </li>
+      <li class="worksheet-stack__sheet" data-stack-sheet="" data-resource-format="maze">
+        <a class="worksheet-stack__link" href="./assets/resource-types/maze.jpg" data-lightbox="" data-worksheet-title="Maze" data-caption="Maze: a CreAItor development resource example." aria-label="Enlarge maze" tabindex="-1">
+          <img src="./assets/resource-types/maze.jpg" alt="A science question maze connected by possible answers from Start to Finish." width="1300" height="920" loading="lazy" decoding="async">
+          <span class="worksheet-stack__enlarge" aria-hidden="true">Enlarge</span>
+        </a>
+      </li>
+      <li class="worksheet-stack__sheet" data-stack-sheet="" data-resource-format="scoot">
+        <a class="worksheet-stack__link" href="./assets/resource-types/scoot.jpg" data-lightbox="" data-worksheet-title="Scoot cards" data-caption="Scoot cards: a CreAItor development resource example." aria-label="Enlarge scoot cards" tabindex="-1">
+          <img src="./assets/resource-types/scoot.jpg" alt="Eight numbered Scoot task cards with fraction diagrams and questions." width="794" height="1123" loading="lazy" decoding="async">
+          <span class="worksheet-stack__enlarge" aria-hidden="true">Enlarge</span>
+        </a>
+      </li>
+      <li class="worksheet-stack__sheet" data-stack-sheet="" data-resource-format="picture-word-game">
+        <a class="worksheet-stack__link" href="./assets/resource-types/in-a-row.jpg" data-lightbox="" data-worksheet-title="In-a-row cards" data-caption="In-a-row cards: a CreAItor development resource example." aria-label="Enlarge in-a-row cards" tabindex="-1">
+          <img src="./assets/resource-types/in-a-row.jpg" alt="Nine illustrated calling cards for the In-a-row CVC word game." width="794" height="1123" loading="lazy" decoding="async">
+          <span class="worksheet-stack__enlarge" aria-hidden="true">Enlarge</span>
+        </a>
+      </li>
+      <li class="worksheet-stack__sheet" data-stack-sheet="" data-resource-format="daily-warm-up-slides">
+        <a class="worksheet-stack__link" href="./assets/resource-types/daily-warm-up-slides.jpg" data-lightbox="" data-worksheet-title="Daily warm-up slides" data-caption="Daily warm-up slides: a CreAItor development resource example." aria-label="Enlarge daily warm-up slides" tabindex="-1">
+          <img src="./assets/resource-types/daily-warm-up-slides.jpg" alt="A classroom warm-up slide asking which part holds a plant in the soil." width="1280" height="720" loading="lazy" decoding="async">
+          <span class="worksheet-stack__enlarge" aria-hidden="true">Enlarge</span>
+        </a>
+      </li>
+      <li class="worksheet-stack__sheet" data-stack-sheet="" data-resource-format="rubric">
+        <a class="worksheet-stack__link" href="./assets/resource-types/rubric.jpg" data-lightbox="" data-worksheet-title="Assessment rubric" data-caption="Assessment rubric: a CreAItor development resource example." aria-label="Enlarge assessment rubric" tabindex="-1">
+          <img src="./assets/resource-types/rubric.jpg" alt="A persuasive-writing assessment rubric with four criteria and four performance levels." width="1123" height="794" loading="lazy" decoding="async">
+          <span class="worksheet-stack__enlarge" aria-hidden="true">Enlarge</span>
+        </a>
+      </li>
+      <li class="worksheet-stack__sheet" data-stack-sheet="" data-resource-format="quiz-slides">
+        <a class="worksheet-stack__link" href="./assets/resource-types/quiz-slides.jpg" data-lightbox="" data-worksheet-title="Quiz slides" data-caption="Quiz slides: a CreAItor development resource example." aria-label="Enlarge quiz slides" tabindex="-1">
+          <img src="./assets/resource-types/quiz-slides.jpg" alt="A multiple-choice plant-science quiz slide with four answer choices." width="1280" height="720" loading="lazy" decoding="async">
+          <span class="worksheet-stack__enlarge" aria-hidden="true">Enlarge</span>
+        </a>
+      </li>
+    </ol>
+  </div>
+  <div class="worksheet-stack__controls" data-stack-controls="" hidden>
+    <p class="worksheet-stack__status"><span class="worksheet-stack__title" data-stack-title="">Activity mat</span><span class="worksheet-stack__position" data-stack-position="" aria-hidden="true">1 / 15</span></p>
+    <div class="worksheet-stack__buttons">
+      <button type="button" data-stack-previous="" aria-label="Previous example" title="Previous example"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"></path></svg></button>
+      <button type="button" data-stack-next="" aria-label="Next example" title="Next example"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m10 6 6 6-6 6"></path></svg></button>
+    </div>
+  </div>
+  <span class="worksheet-stack__announcement" data-stack-announcement="" aria-live="polite" aria-atomic="true"></span>
+</div>
+            </div>
+            <p class="preview-caption">15 resource formats. Development examples from CreAItor.</p>
+            <div class="project-description">
+              <div class="project-facts" aria-label="CreAItor scope"><p><strong>F–6</strong><span>Foundation to Year 6</span></p><p><strong>3 levels</strong><span>of difficulty</span></p><p><strong>AI review</strong><span>in evaluation runs</span></p></div>
+              <h4>From a teacher’s request to a classroom resource.</h4>
+              <p>Structured generation, editable questions and PDF rendering. The evaluation harness runs real user prompts through generation and export, then uses AI to review each page for correctness, suitability and layout.</p>
+              <div class="project-footer"><span>Airteam · Top Teacher</span><a href="https://topteacher.com.au/">Top Teacher</a></div>
+              <details class="project-details"><summary>Generation, checks &amp; evaluation <svg class="disclosure-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></summary><div class="detail-copy"><h5>Generation and repair</h5><p>Resources span Foundation to Year 6, with Working Towards, At Standard and Extending difficulty levels. Zod checks structure and types; separate content checks and targeted repair handle the generated questions.</p><h5>Visual evaluation</h5><p>The harness uses real user prompts, generates resources and exports PDFs. A separate AI visual review inspects every exported page for answer correctness, age suitability, missing content and print or layout defects.</p><h5>Development Labs</h5><p>Deterministic examples expose question formats, forms, editors, schemas and renderers for testing with AI coding agents. These Labs are separate from live generation and the full evaluation harness.</p><h5>Decisions API</h5><p>Fast generation checks support optional artwork review and curriculum matching.</p></div></details>
+            </div>
+          </article>
+          <article class="project-panel" id="agents" data-project-panel="" aria-labelledby="tab-agents" role="tabpanel" hidden="">
+            <div class="preview-toolbar"><h3 id="agents-title">Designer-first</h3><div class="view-switch" aria-label="Designer-first preview" data-enhance-only=""><button type="button" data-media-view="website" aria-pressed="true">Website</button><button type="button" data-media-view="workflow" aria-pressed="false">Workflow</button></div></div>
+            <div class="preview-stage designer-visual">
+              <figure class="media-view" data-media="website"><a class="image-link" href="./assets/airteam-home-public.jpg" data-lightbox="" data-caption="airteam.com.au, a public website capture. Used to illustrate the designer-first development workflow." aria-label="Enlarge the Airteam website capture"><img src="./assets/airteam-home-public.jpg" alt="Airteam’s website showing the headline Complex software, made human and its floating anvil illustration." width="1348" height="926" loading="lazy"><span class="image-enlarge">Enlarge</span></a></figure>
+              <div class="media-view workflow-view" data-media="workflow" hidden=""><div class="workflow-context"><span>Sanity request</span><span>Figma context</span><span>Codebase</span></div><div class="workflow-route" aria-hidden="true"></div><div class="workflow-artifact"><img src="./assets/airteam-home-public.jpg" alt="" width="1348" height="926" loading="lazy"><div><strong>Reviewable implementation</strong><p>Pull request in agent chat<br>Checks and preview</p></div></div><div class="workflow-route short" aria-hidden="true"></div><p class="review-gate">Human approval before release</p></div>
+            </div>
+            <p class="preview-caption" data-media-caption="" data-caption-default="airteam.com.au, captured from the public website." data-caption-workflow="Illustrative workflow around a real public website capture.">airteam.com.au, captured from the public website.</p>
+            <div class="project-description">
+              <div class="workflow-summary"><span>Design context</span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"></path></svg><span>Agent implementation</span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"></path></svg><span>Human review</span></div>
+              <h4>Design requests become reviewable code.</h4>
+              <p>A designer-first coding agent workflow for <a href="https://airteam.com.au/">airteam.com.au</a>. Requests in Sanity, Figma context and the existing codebase guide implementation. The GitHub pull request is visible in the agent chat, with checks and a preview available before human approval.</p>
+              <div class="project-footer"><span>Airteam · Internal development tooling</span><a href="https://airteam.com.au/">airteam.com.au</a></div>
+              <details class="project-details"><summary>How the workflow fits together <svg class="disclosure-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></summary><div class="detail-copy"><h5>Context before implementation</h5><p>A request starts in Sanity. The agent works with the relevant content, Figma design context and codebase to prepare a change that fits the existing site.</p><h5>Review before release</h5><p>The GitHub pull request is visible from the agent chat interface. Checks and a preview support human review and approval before release. The diagram illustrates the process; it is not a recorded agent run.</p></div></details>
+            </div>
+          </article>
+        </div>
+      </section>
+      <section class="about reading-section" id="about" aria-labelledby="about-title">
+        <div class="about-bio"><h2 id="about-title">About me</h2><p>I'm based in Perth, working as a senior software engineer at Airteam and co-founder and CTO of KURB.</p><p>I've spent more than ten years building web applications, backend systems and infrastructure. I'm interested in teams working on AI products, coding agents and developer tools.</p></div>
+        <div class="about-practice"><section class="credentials" aria-labelledby="credentials-title"><h3 id="credentials-title">Certifications earned</h3><ul class="credential-list"><li>AWS Certified DevOps Engineer <span>Professional</span></li><li>AWS Certified Developer <span>Associate</span></li><li>AWS Certified Cloud Practitioner</li><li>MEGA Developer <span>MEGA.dev · 2026</span></li></ul></section><section class="personal-repo" aria-labelledby="ncode-title"><h3 id="ncode-title"><a href="https://github.com/nicholashu/n-code">n-code</a></h3><p>Public coding-agent skills for planning, coordination, evaluation and review. Original tools alongside credited open-source adaptations.</p></section></div>
+        <section class="adopted-bots" aria-labelledby="bots-title" data-bot-gallery=""><div class="bots-heading"><h3 id="bots-title">Currently adopted bots</h3><p>OpenMausBot · Project work, testing and review.</p></div><ul class="bot-lineup">
+          <li><figure><img src="./assets/bots/chief-of-staff-still.png" data-bot-gif="./assets/bots/chief-of-staff.gif" width="96" height="96" alt="" loading="lazy" data-bot-still="./assets/bots/chief-of-staff-still.png"><figcaption>Cory<span>Chief of Staff</span></figcaption></figure></li>
+          <li><figure><img src="./assets/bots/hopper-cto-still.png" data-bot-gif="./assets/bots/hopper-cto.gif" width="96" height="96" alt="" loading="lazy" data-bot-still="./assets/bots/hopper-cto-still.png"><figcaption>Hopper<span>CTO</span></figcaption></figure></li>
+          <li><figure><img src="./assets/bots/ada-kurb-still.png" data-bot-gif="./assets/bots/ada-kurb.gif" width="96" height="96" alt="" loading="lazy" data-bot-still="./assets/bots/ada-kurb-still.png"><figcaption>Ada<span>Project lead</span></figcaption></figure></li>
+          <li><figure><img src="./assets/bots/lin-misc-still.png" data-bot-gif="./assets/bots/lin-misc.gif" width="96" height="96" alt="" loading="lazy" data-bot-still="./assets/bots/lin-misc-still.png"><figcaption>Lin<span>Project lead</span></figcaption></figure></li>
+          <li><figure><img src="./assets/bots/pixel-dms-still.png" data-bot-gif="./assets/bots/pixel-dms.gif" width="96" height="96" alt="" loading="lazy" data-bot-still="./assets/bots/pixel-dms-still.png"><figcaption>Pixel<span>Project lead</span></figcaption></figure></li>
+          <li><figure><img src="./assets/bots/rigel-top-teacher-still.png" data-bot-gif="./assets/bots/rigel-top-teacher.gif" width="96" height="96" alt="" loading="lazy" data-bot-still="./assets/bots/rigel-top-teacher-still.png"><figcaption>Rigel<span>Project lead</span></figcaption></figure></li>
+          <li><figure><img src="./assets/bots/pr-reviewer-still.png" data-bot-gif="./assets/bots/pr-reviewer.gif" width="96" height="96" alt="" loading="lazy" data-bot-still="./assets/bots/pr-reviewer-still.png"><figcaption>PR Reviewer</figcaption></figure></li>
+          <li><figure><img src="./assets/bots/borges-avatar-still.png" data-bot-gif="./assets/bots/borges-avatar.gif" width="96" height="96" alt="" loading="lazy" data-bot-still="./assets/bots/borges-avatar-still.png"><figcaption>The Librarian</figcaption></figure></li>
+          <li><figure><img src="./assets/bots/jira-still.png" data-bot-gif="./assets/bots/jira.gif" width="96" height="96" alt="" loading="lazy" data-bot-still="./assets/bots/jira-still.png"><figcaption>Jira</figcaption></figure></li>
+          <li><figure><img src="./assets/bots/qa-tester-lens-still.png" data-bot-gif="./assets/bots/qa-tester-lens.gif" width="96" height="96" alt="" loading="lazy" data-bot-still="./assets/bots/qa-tester-lens-still.png"><figcaption>QA Tester</figcaption></figure></li>
+        </ul></section>
+      </section>
+      <section class="more-work reading-section" aria-labelledby="support-title"><div class="section-heading"><h2 id="support-title">Other work</h2><p>Contributions to websites,<br>dashboards and AI tools.</p></div><ul class="work-index">
+        <li><a href="https://hbfdental.com.au/"><span class="work-name">HBF Dental</span><span class="work-scope">Website</span></a></li>
+        <li><a href="https://www.airteam.com.au/case-studies/dhf"><span class="work-name">Doctors' Health Fund</span><span class="work-scope">Website · Airteam</span></a></li>
+        <li><a href="https://www.airteam.com.au/case-studies/museums-of-history-nsw"><span class="work-name">Museums of History NSW</span><span class="work-scope">Website · Airteam</span></a></li>
+        <li><a href="https://www.airteam.com.au/case-studies/pacific-smiles-group"><span class="work-name">Pacific Smiles Dental</span><span class="work-scope">Booking widget · Airteam</span></a></li>
+        <li><a href="https://www.mymoto.com.au/"><span class="work-name">MyMoto</span><span class="work-scope">Website</span></a></li>
+        <li><div class="work-entry"><span class="work-name">ViewJobs</span><span class="work-scope">Previous website</span></div></li>
+        <li><div class="work-entry"><span class="work-name">Jesters Pies</span><span class="work-scope">Previous website</span></div></li>
+        <li><a href="https://www.airteam.com.au/case-studies/news-uk"><span class="work-name">News UK</span><span class="work-scope">Analytics dashboard · Airteam</span></a></li>
+        <li><a href="https://www.airteam.com.au/case-studies/total-inter-action"><span class="work-name">Total Inter Action</span><span class="work-scope">AI sales coaching prototype · Airteam</span></a></li>
+        <li><a href="https://www.airteam.com.au/case-studies/csiro"><span class="work-name">CSIRO</span><span class="work-scope">Dashboard modernisation · Airteam</span></a></li>
+      </ul></section>
+      <section class="contact" id="contact" aria-label="Contact Nick"><a class="contact-email" href="mailto:nick@nickhu.info"><span>Get in touch</span><span class="email-address">nick@nickhu.info</span></a><footer><div class="social-links"><a href="https://github.com/nicholashu">GitHub</a><a href="https://www.linkedin.com/in/nick-hu-perth/">LinkedIn</a></div><span>Perth, Western Australia</span></footer></section>
+    </main>
+  </div>
+  <dialog class="image-dialog" id="image-dialog" aria-label="Enlarged project image"><div class="dialog-toolbar"><p id="dialog-caption"></p><button type="button" id="close-dialog" aria-label="Close enlarged image"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg><span>Close</span></button></div><div class="dialog-image-wrap"><img id="dialog-image" src="./assets/kurb-product-clean.jpg" alt=""></div></dialog>
+</body>
 </html>

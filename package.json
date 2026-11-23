@@ -1,33 +1,13 @@
 {
   "name": "nickhu.info",
   "private": true,
-  "version": "2.0.0",
+  "version": "3.0.0",
   "type": "module",
-  "description": "Nick Hu's interactive terminal portfolio",
-  "author": "Nick Hu <nick@nickhu.info>",
-  "license": "MIT",
   "engines": {
-    "node": ">=22.18.0"
+    "node": ">=20"
   },
   "scripts": {
-    "dev": "vite --host 0.0.0.0 --port 8080",
-    "develop": "npm run dev",
-    "start": "npm run dev",
-    "build": "tsc --noEmit && vite build",
-    "preview": "vite preview --host 0.0.0.0 --port 8080",
-    "serve": "npm run preview",
-    "test": "node --test src/terminal.test.ts"
-  },
-  "dependencies": {
-    "@fontsource/ibm-plex-mono": "^5.3.0",
-    "react": "^19.3.0",
-    "react-dom": "^19.3.0"
-  },
-  "devDependencies": {
-    "@types/react": "^19.2.0",
-    "@types/react-dom": "^19.2.0",
-    "@vitejs/plugin-react": "^6.1.1",
-    "typescript": "^7.0.2",
-    "vite": "^8.3.1"
+    "build": "node scripts/build.mjs",
+    "test": "node --test tests/*.test.mjs"
   }
 }
