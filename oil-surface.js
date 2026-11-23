@@ -4,11 +4,16 @@ const surface = document.querySelector('.oil-surface');
 let canvas = surface?.querySelector('canvas');
 // Sampled wallpaper colours, with broad neutral fields and narrow coloured fringes.
 // Shared stops keep the GPU and software versions in the same palette.
+// The neutral base matches --page in portfolio.css and oil-surface.css.
+const hexColour = hex => [1,3,5].map(i => Number.parseInt(hex.slice(i,i+2),16)/255);
+const baseHex = '#c3c5be';
+const base = hexColour(baseHex);
+const ridgeTint = [.84,.85,.81];
 const filmStops = [
-  [0, '#a1a1a1'], [.32, '#a1a1a1'], [.44, '#859280'], [.56, '#859280'],
-  [.62, '#809971'], [.68, '#809971'], [.73, '#948aa5'], [.78, '#7f8498'],
-  [.84, '#a1a1a1'], [.94, '#a1a1a1'], [.97, '#a19977'], [1, '#a1a1a1']
-].map(([at, hex]) => ({at, colour: [1,3,5].map(i => Number.parseInt(hex.slice(i,i+2),16)/255)}));
+  [0, baseHex], [.32, baseHex], [.44, '#a7b3a1'], [.56, '#a7b3a1'],
+  [.62, '#a2b893'], [.68, '#a2b893'], [.73, '#b6adc6'], [.78, '#a1a6b9'],
+  [.84, baseHex], [.94, baseHex], [.97, '#c3bb99'], [1, baseHex]
+].map(([at, hex]) => ({at, colour: hexColour(hex)}));
 const glVector = colour => `vec3(${colour.map(v=>v.toFixed(6)).join(',')})`;
 const filmSpectrum = filmStops.slice(1).map((stop,i) => {
   const before=filmStops[i];
@@ -37,7 +42,7 @@ function createGLRenderer(target) {
     vec3 spectrum(float value) {
       float h=fract(value);
       ${filmSpectrum}
-      return vec3(.631373);
+      return ${glVector(base)};
     }
     void main() {
       float aspect=u_size.x/u_size.y;
@@ -58,11 +63,11 @@ function createGLRenderer(target) {
       vec3 rainbow=spectrum(cycle);
       float pearl=.5+.5*sin(field*1.65-q.y*.55-.6);
       float saturation=.88-.14*pearl*pearl;
-      vec3 col=mix(vec3(.631373),rainbow,saturation);
+      vec3 col=mix(${glVector(base)},rainbow,saturation);
       float ridge=exp(-pow(sin(fold)*4.4,2.));
       float hollow=exp(-pow(sin(fold+.32)*3.1,2.));
       col*=1.-hollow*.018;
-      col=mix(col,vec3(.72,.73,.68),ridge*.055);
+      col=mix(col,${glVector(ridgeTint)},ridge*.055);
       float broad=.5+.5*sin(field*2.2+q.x*.3);
       col+=vec3(.003)*broad;
       gl_FragColor=vec4(clamp(col,0.,1.),1.);
@@ -155,10 +160,10 @@ function createCPURenderer(target) {
         const ridge=exp(-1*(sin(fold)*4.4)**2)*.055;
         const shadow=1-exp(-1*(sin(fold+.32)*3.1)**2)*.018;
         const broad=.5+.5*sin(field*2.2+qx*.3);
-        let red=(.631373+(a[0]+(b[0]-a[0])*f-.631373)*saturation)*shadow;
-        let green=(.631373+(a[1]+(b[1]-a[1])*f-.631373)*saturation)*shadow;
-        let blue=(.631373+(a[2]+(b[2]-a[2])*f-.631373)*saturation)*shadow;
-        red+=(.72-red)*ridge+.003*broad;green+=(.73-green)*ridge+.003*broad;blue+=(.68-blue)*ridge+.003*broad;
+        let red=(base[0]+(a[0]+(b[0]-a[0])*f-base[0])*saturation)*shadow;
+        let green=(base[1]+(a[1]+(b[1]-a[1])*f-base[1])*saturation)*shadow;
+        let blue=(base[2]+(a[2]+(b[2]-a[2])*f-base[2])*saturation)*shadow;
+        red+=(ridgeTint[0]-red)*ridge+.003*broad;green+=(ridgeTint[1]-green)*ridge+.003*broad;blue+=(ridgeTint[2]-blue)*ridge+.003*broad;
         data[i]=round(red*255);data[i+1]=round(green*255);data[i+2]=round(blue*255);
       }
       context.putImageData(pixels,0,0);

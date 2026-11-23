@@ -6,17 +6,17 @@
   overflow: hidden;
   pointer-events: none;
   contain: strict;
-  background: #a1a1a1;
+  background: #c3c5be;
 }
 .oil-surface::before {
   content: "";
   position: absolute;
   inset: -12%;
   background:
-    radial-gradient(ellipse at 78% 18%, #809971 8%, #859280de 20%, #948aa582 27%, #7f84987d 32%, transparent 44%),
-    radial-gradient(ellipse at 16% 78%, #859280ee 10%, #859280d9 24%, #948aa578 30%, transparent 43%),
-    radial-gradient(ellipse at 83% 68%, #a1997770 5%, #7f849890 13%, transparent 28%),
-    #a1a1a1;
+    radial-gradient(ellipse at 78% 18%, #a2b893 8%, #a7b3a1de 20%, #b6adc682 27%, #a1a6b97d 32%, transparent 44%),
+    radial-gradient(ellipse at 16% 78%, #a7b3a1ee 10%, #a7b3a1d9 24%, #b6adc678 30%, transparent 43%),
+    radial-gradient(ellipse at 83% 68%, #c3bb9970 5%, #a1a6b990 13%, transparent 28%),
+    #c3c5be;
   filter: blur(13px);
 }
 .oil-surface canvas {
