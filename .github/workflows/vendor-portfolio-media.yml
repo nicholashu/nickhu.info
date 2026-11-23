@@ -1,0 +1,33 @@
+name: Vendor portfolio media
+on:
+  push:
+    branches:
+      - feat/portfolio-chatgpt-sites
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm test
+      - name: Build and retrieve published images, bot animations and fonts
+        run: npm run build
+      - name: Commit the media into the repository for independent future builds
+        shell: bash
+        run: |
+          mkdir -p assets
+          cp -R dist/assets/. assets/
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets
+          if ! git diff --cached --quiet; then
+            git commit -m "Vendor portfolio media locally"
+            git push
+          fi
