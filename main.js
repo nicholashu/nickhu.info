@@ -1,6 +1,34 @@
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const ease = 'cubic-bezier(.16,1,.3,1)';
 
+const kurbFacts = document.querySelector('.kurb-facts');
+if (kurbFacts && !reducedMotion.matches && 'IntersectionObserver' in window) {
+  const observer = new IntersectionObserver(entries => {
+    if (!entries.some(entry => entry.isIntersecting)) return;
+    observer.disconnect();
+    if (reducedMotion.matches) return;
+
+    const counters = [...kurbFacts.querySelectorAll('[data-count-to]')].map(node => ({
+      node,
+      target: Number(node.dataset.countTo)
+    }));
+    const formatter = new Intl.NumberFormat('en');
+    let start;
+    function tick(now) {
+      start ??= now;
+      const progress = reducedMotion.matches ? 1 : Math.min((now - start) / 900, 1);
+      const eased = 1 - (1 - progress) ** 2;
+      for (const {node, target} of counters) {
+        const value = formatter.format(Math.floor(target * eased));
+        if (node.textContent !== value) node.textContent = value;
+      }
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }, {threshold:.25});
+  observer.observe(kurbFacts);
+}
+
 function imageRect(img) {
   const rect = img.getBoundingClientRect();
   if (getComputedStyle(img).objectFit !== 'contain' || !img.naturalWidth) return rect;

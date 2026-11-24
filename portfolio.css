@@ -70,7 +70,9 @@ ul{margin:0;padding:0;list-style:none}
 .project-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;padding-bottom:22px}
 .project-facts p{font-variant-numeric:tabular-nums}
 .project-facts strong{display:block;font-size:29px;font-weight:550;letter-spacing:-.035em;line-height:1.12}
-.project-facts span{display:block;font-size:12px;line-height:1.4;margin-top:5px;color:var(--secondary)}
+.project-facts p > span:not(.fact-value){display:block;font-size:12px;line-height:1.4;margin-top:5px;color:var(--secondary)}
+.kurb-facts{grid-template-columns:repeat(4,minmax(0,1fr))}
+.fact-value{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 .project-description h4{font-size:23px;margin-bottom:10px;line-height:1.16}
 .project-description>p{font-size:15px;line-height:1.6;color:#3e483f}
 .project-footer{display:flex;align-items:center;justify-content:space-between;gap:16px;font-size:12px;line-height:1.4;margin-top:18px;padding-bottom:22px}
@@ -242,7 +244,7 @@ footer{display:flex;justify-content:space-between;gap:20px;font-size:13px;font-w
   .project-description{padding-top:18px}
   .project-facts{gap:10px;padding-bottom:19px}
   .project-facts strong{font-size:26px}
-  .project-facts span{font-size:11px}
+  .project-facts p > span:not(.fact-value){font-size:11px}
   .project-description h4{font-size:22px}
   .project-description>p{font-size:15px;line-height:1.6}
   .project-footer{font-size:11px;padding-bottom:18px;gap:12px}
@@ -296,8 +298,9 @@ footer{display:flex;justify-content:space-between;gap:20px;font-size:13px;font-w
   .view-switch button{font-size:11px;min-height:34px;padding:7px 8px}
   .project-browser-ready .preview-stage{aspect-ratio:1.45}
   .project-facts{gap:8px}
+  .kurb-facts{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:12px}
   .project-facts strong{font-size:24px}
-  .project-facts span{font-size:10px;line-height:1.35}
+  .project-facts p > span:not(.fact-value){font-size:10px;line-height:1.35}
   .project-description h4{font-size:21px;line-height:1.18}
   .project-description>p{font-size:14px}
   .project-footer{margin-top:15px;align-items:flex-start}
@@ -344,7 +347,7 @@ footer{display:flex;justify-content:space-between;gap:20px;font-size:13px;font-w
   .project-name{font-size:17px}
   .project-index,.project-panel{padding-left:13px;padding-right:13px}
   .project-facts strong{font-size:21px}
-  .project-facts span{font-size:9px}
+  .project-facts p > span:not(.fact-value){font-size:9px}
   .preview-toolbar h3{font-size:11px}
   .view-switch button{padding:7px 6px;font-size:10px}
   .intro h1{font-size:43px}
