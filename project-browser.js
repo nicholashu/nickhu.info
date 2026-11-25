@@ -7,6 +7,72 @@ const panels = [...document.querySelectorAll('[data-project-panel]')];
 const reduced = matchMedia('(prefers-reduced-motion: reduce)');
 const compact = matchMedia('(max-width: 1024px)');
 const animations = new Map();
+const workBrowser = document.querySelector('.work-browser');
+let heightAnimation;
+
+function resizeBrowser(update, animate = true) {
+  const canAnimate = animate && !reduced.matches && workBrowser?.animate;
+  const from = canAnimate ? workBrowser.getBoundingClientRect().height : 0;
+  heightAnimation?.cancel();
+  heightAnimation = undefined;
+  update();
+  if (!canAnimate) return;
+  const to = workBrowser.getBoundingClientRect().height;
+  if (Math.abs(to - from) < 1) return;
+  const animation = workBrowser.animate([
+    { height: `${from}px` },
+    { height: `${to}px` }
+  ], { duration: 300, easing: 'cubic-bezier(.22,.78,.25,1)' });
+  heightAnimation = animation;
+  animation.finished.catch(() => {}).finally(() => {
+    if (heightAnimation === animation) heightAnimation = undefined;
+  });
+}
+
+const detailAnimations = new Map();
+
+function finishDisclosure(details, state) {
+  if (detailAnimations.get(details) !== state) return;
+  detailAnimations.delete(details);
+  state.animation?.cancel();
+  details.open = state.open;
+  details.classList.remove('details-animating');
+}
+
+function settleDisclosures() {
+  for (const [details, state] of detailAnimations) finishDisclosure(details, state);
+}
+
+for (const details of document.querySelectorAll('.project-details')) {
+  const summary = details.querySelector('summary');
+  if (!summary) continue;
+  summary.addEventListener('click', event => {
+    if (reduced.matches || !details.animate) return;
+    event.preventDefault();
+    heightAnimation?.cancel();
+    heightAnimation = undefined;
+    const from = details.getBoundingClientRect().height;
+    const previous = detailAnimations.get(details);
+    const open = !(previous?.open ?? details.open);
+    if (previous) {
+      detailAnimations.delete(details);
+      previous.animation.cancel();
+    }
+    // Measure the native closed/open dimensions; keep content mounted for the close.
+    details.open = open;
+    const to = details.getBoundingClientRect().height;
+    details.open = true;
+    details.classList.add('details-animating');
+    const animation = details.animate([
+      { height: `${from}px` },
+      { height: `${to}px` }
+    ], { duration: 260, easing: 'cubic-bezier(.22,.78,.25,1)' });
+    const state = { animation, open };
+    detailAnimations.set(details, state);
+    animation.finished.then(() => finishDisclosure(details, state)).catch(() => {});
+  });
+}
+
 
 function revealImage(node, animate = true) {
   animations.get(node)?.cancel();
@@ -43,13 +109,20 @@ function selectProject(id, {animate = true, updateHash = false} = {}) {
   const previous = panels.find(panel => !panel.hidden);
   const changed = next.hidden;
   const direction = panels.indexOf(next) > panels.indexOf(previous) ? 1 : -1;
-  for (const panel of panels) panel.hidden = panel !== next;
-  for (const tab of tabs) {
-    const selected = tab.dataset.projectTab === id;
-    tab.setAttribute('aria-selected', String(selected));
-    tab.tabIndex = selected ? 0 : -1;
+  if (!changed && animate) {
+    if (updateHash) history.replaceState(null, '', `#${id}`);
+    return;
   }
-  document.dispatchEvent(new CustomEvent('projectchange', {detail:{id}}));
+  resizeBrowser(() => {
+    settleDisclosures();
+    for (const panel of panels) panel.hidden = panel !== next;
+    for (const tab of tabs) {
+      const selected = tab.dataset.projectTab === id;
+      tab.setAttribute('aria-selected', String(selected));
+      tab.tabIndex = selected ? 0 : -1;
+    }
+    document.dispatchEvent(new CustomEvent('projectchange', {detail:{id}}));
+  }, animate);
   if (changed) revealProject(next, direction, animate);
   if (updateHash) history.replaceState(null, '', `#${id}`);
 }
@@ -60,6 +133,11 @@ if (tabList && tabs.length === panels.length && tabs.length) {
   const orient = () => tabList.setAttribute('aria-orientation', compact.matches ? 'horizontal' : 'vertical');
   orient();
   compact.addEventListener('change', orient);
+  addEventListener('resize', () => {
+    heightAnimation?.cancel();
+    heightAnimation = undefined;
+    settleDisclosures();
+  }, { passive: true });
   for (const tab of tabs) {
     const id = tab.dataset.projectTab;
     tab.id = `tab-${id}`;
@@ -96,10 +174,12 @@ if (tabList && tabs.length === panels.length && tabs.length) {
       const next = views.find(view => view.dataset.media === name);
       if (!next) return;
       const changed = next.hidden;
-      for (const view of views) view.hidden = view !== next;
-      for (const button of buttons) button.setAttribute('aria-pressed', String(button.dataset.mediaView === name));
-      if (caption) caption.textContent = caption.getAttribute(`data-caption-${name}`) || caption.dataset.captionDefault;
-      document.dispatchEvent(new CustomEvent('mediaviewchange', {detail:{id:panel.id,name}}));
+      resizeBrowser(() => {
+        for (const view of views) view.hidden = view !== next;
+        for (const button of buttons) button.setAttribute('aria-pressed', String(button.dataset.mediaView === name));
+        if (caption) caption.textContent = caption.getAttribute(`data-caption-${name}`) || caption.dataset.captionDefault;
+        document.dispatchEvent(new CustomEvent('mediaviewchange', {detail:{id:panel.id,name}}));
+      }, animate && changed && !panel.hidden);
       if (changed) revealImage(next, animate);
     };
     buttons.forEach(button => button.addEventListener('click', event => selectView(button.dataset.mediaView,event.detail !== 0)));
@@ -108,10 +188,15 @@ if (tabList && tabs.length === panels.length && tabs.length) {
   document.body.classList.add('project-browser-ready');
   const initial = panels.some(panel => panel.id === location.hash.slice(1)) ? location.hash.slice(1) : panels[0].id;
   selectProject(initial,{animate:false});
-  mountKurbExplorer(document.getElementById('kurb'));
+  mountKurbExplorer(document.getElementById('kurb'), { resize: resizeBrowser });
   mountWorksheetStack(document.getElementById('creaitor'));
   addEventListener('hashchange', () => selectProject(location.hash.slice(1),{animate:false}));
   reduced.addEventListener('change', () => {
-    if (reduced.matches) animations.forEach(animation => animation.cancel());
+    if (reduced.matches) {
+      animations.forEach(animation => animation.cancel());
+      heightAnimation?.cancel();
+      heightAnimation = undefined;
+      settleDisclosures();
+    }
   });
 }

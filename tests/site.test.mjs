@@ -91,3 +91,26 @@ test('scroll reveals and accessible bot reactions without extra project or conta
   assert.doesNotMatch(css, /@keyframes contact-spectrum/);
   assert.match(css, /\.bot-trigger\.bot-reacting/);
 });
+
+
+test('project and disclosure resize animations retain native state and motion preferences', async () => {
+  const browser = await readFile(path.join(root, 'project-browser.js'), 'utf8');
+  assert.match(browser, /function resizeBrowser\(update, animate = true\)/);
+  assert.match(browser, /heightAnimation\?\.cancel\(\)/);
+  assert.match(browser, /details\.open = state\.open/);
+  assert.match(browser, /settleDisclosures\(\)/);
+  assert.equal((html.match(/<details class="project-details">/g) || []).length, 3);
+});
+
+test('KURB has separate mobile compositions, with all vendor labels and animation hooks', async () => {
+  const css = await readFile(path.join(root, 'portfolio.css'), 'utf8');
+  const explorer = await readFile(path.join(root, 'kurb-explorer.js'), 'utf8');
+  const mobile = html.match(/<g class="kurb-mobile-collection"[\s\S]*?<g class="kurb-mobile-vectors"/)?.[0] || '';
+  for (const vendor of ['eBay','Depop','Mercari (JP)','Kindal','HULA','Tradera','Grailed','Vestiaire','Bunjang','Rakuten','ALLU','Feelway']) assert.ok(mobile.includes('>'+vendor+'</text>'));
+  assert.equal((html.match(/data-mobile-garment="/g) || []).length, 4);
+  assert.equal((html.match(/data-mobile-match="/g) || []).length, 2);
+  assert.match(explorer, /mobile \? '0 0 480 600' : '0 0 1100 720'/);
+  assert.match(explorer, /renderMobileCollection\(elapsed, still\)/);
+  assert.match(explorer, /renderMobileSimilarity\(elapsed, still\)/);
+  assert.match(css, /aspect-ratio: 480 \/ 600/);
+});
