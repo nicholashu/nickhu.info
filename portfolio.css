@@ -669,3 +669,97 @@ footer{display:flex;justify-content:space-between;gap:20px;font-size:13px;font-w
   .project-browser-ready .view-switch::before,
   .project-browser-ready .view-switch button { transition: none; }
 }
+
+
+/* Portfolio micro-interactions: no layout changes or new media downloads. */
+.hero-line { display: block; }
+@media (prefers-reduced-motion: no-preference) {
+  .hero-line {
+    animation: hero-line-reveal 520ms cubic-bezier(.22,.78,.25,1) both;
+  }
+  .hero-line + .hero-line { animation-delay: 85ms; }
+  @keyframes hero-line-reveal {
+    from { opacity: .35; transform: translateY(10px); clip-path: inset(0 0 18% 0); }
+    to { opacity: 1; transform: translateY(0); clip-path: inset(0 0 0 0); }
+  }
+
+
+}
+.counter-rolling {
+  display: inline-flex;
+  vertical-align: bottom;
+  align-items: center;
+  height: 1.12em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.counter-reel {
+  display: inline-block;
+  height: 1.12em;
+  overflow: hidden;
+  flex: none;
+}
+.counter-reel__strip {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.12;
+}
+.counter-reel__strip > span {
+  display: block;
+  flex: 0 0 1.12em;
+  height: 1.12em;
+  line-height: 1.12;
+}
+
+
+/* Role-specific bot reactions. */
+@media screen {
+  /* Each existing role-specific GIF remains the sprite; the button adds a small reaction. */
+  .bot-trigger {
+    appearance: none;
+    display: grid;
+    place-items: center;
+    width: max-content;
+    min-width: 44px;
+    min-height: 44px;
+    max-width: 100%;
+    margin: 0 auto 8px;
+    padding: 3px;
+    border: 0;
+    border-radius: 10px;
+    background: transparent;
+  }
+  .bot-lineup .bot-trigger img { margin: 0; }
+  .bot-trigger.bot-reacting, .bot-trigger:focus-visible { background: #e0e8d8; }
+  .bot-trigger:focus-visible { outline-offset: 2px; border-radius: 10px; }
+
+}
+@media screen and (hover: hover) {
+  .bot-trigger:hover { background: #e0e8d8; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .bot-trigger { transition: background-color 180ms ease; }
+}
+
+
+/* Animate native disclosure heights without changing their keyboard semantics. */
+.project-details.details-animating { overflow: hidden; }
+.project-details.details-animating .detail-copy { overflow: clip; }
+
+/* A purpose-built portrait composition for technical scenes on narrow screens.
+   Desktop SVG coordinates and the live product screenshot remain unchanged. */
+.kurb-mobile-collection, .kurb-mobile-vectors { display: none; }
+.kurb-diagram[data-layout="mobile"] .kurb-collection,
+.kurb-diagram[data-layout="mobile"] .kurb-vectors { display: none; }
+.kurb-diagram[data-layout="mobile"] .kurb-mobile-collection,
+.kurb-diagram[data-layout="mobile"] .kurb-mobile-vectors { display: block; }
+.kurb-mobile-label { font-size: 22px; font-weight: 550; letter-spacing: -.025em; }
+.kurb-mobile-vendors text { font-size: 23px; font-weight: 500; letter-spacing: -.02em; }
+.kurb-mobile-vendor-count { font-size: 25px; font-weight: 600; letter-spacing: -.025em; }
+@media screen and (max-width: 520px) {
+  .project-browser-ready #kurb[data-kurb-view="collection"] .kurb-visual,
+  .project-browser-ready #kurb[data-kurb-view="similarity"] .kurb-visual {
+    aspect-ratio: 480 / 600;
+    max-height: none;
+  }
+}

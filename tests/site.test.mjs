@@ -58,3 +58,59 @@ test('sliding selection follows the existing accessible navigation state', async
   assert.match(styles, /translateY\(calc\(var\(--active-index\)/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*?\.view-switch::before,[\s\S]*?transition: none/);
 });
+
+
+test('micro-interactions preserve the static heading, final statistics and reduced motion', async () => {
+  const css = await readFile(path.join(root, 'portfolio.css'), 'utf8');
+  const browser = await readFile(path.join(root, 'project-browser.js'), 'utf8');
+  const main = await readFile(path.join(root, 'main.js'), 'utf8');
+  assert.match(html, /<h1 id="intro-title"><span class="hero-line">Software &amp;<\/span> <span class="hero-line">applied AI\.<\/span><\/h1>/);
+  assert.match(css, /@media \(prefers-reduced-motion: no-preference\) \{\s*\.hero-line/);
+  assert.doesNotMatch(css, /\.portrait-frame:(hover|active) img/);
+  assert.match(browser, /revealProject\(next, direction, animate\)/);
+  assert.match(browser, /if \(!animate \|\| reduced\.matches \|\| !panel\.animate\) return;/);
+  assert.match(main, /node\.textContent = finalValue/);
+  assert.match(main, /reducedMotion\.addEventListener\('change', onMotionChange\)/);
+  for (const target of [46,1000,4,100]) {
+    assert.ok(html.includes(`data-count-to="${target}"`));
+  }
+});
+
+
+test('scroll reveals and accessible bot reactions without extra project or contact effects', async () => {
+  const css = await readFile(path.join(root, 'portfolio.css'), 'utf8');
+  const main = await readFile(path.join(root, 'main.js'), 'utf8');
+  const bots = await readFile(path.join(root, 'bot-gallery.js'), 'utf8');
+  assert.equal((html.match(/class="bot-trigger"/g) || []).length, 10);
+  assert.equal((html.match(/aria-label="Animate [^"]+"/g) || []).length, 10);
+  assert.match(bots, /button\.addEventListener\('click', \(\) => react\(button\)\)/);
+  assert.match(bots, /if \(preference\.matches \|\| !sprite\.animate\) return;/);
+  assert.match(main, /observer\.unobserve\(entry\.target\)/);
+  assert.match(main, /target\.getBoundingClientRect\(\)\.top >= innerHeight/);
+  assert.doesNotMatch(css, /--project-accent:/);
+  assert.doesNotMatch(css, /@keyframes contact-spectrum/);
+  assert.match(css, /\.bot-trigger\.bot-reacting/);
+});
+
+
+test('project and disclosure resize animations retain native state and motion preferences', async () => {
+  const browser = await readFile(path.join(root, 'project-browser.js'), 'utf8');
+  assert.match(browser, /function resizeBrowser\(update, animate = true\)/);
+  assert.match(browser, /heightAnimation\?\.cancel\(\)/);
+  assert.match(browser, /details\.open = state\.open/);
+  assert.match(browser, /settleDisclosures\(\)/);
+  assert.equal((html.match(/<details class="project-details">/g) || []).length, 3);
+});
+
+test('KURB has separate mobile compositions, with all vendor labels and animation hooks', async () => {
+  const css = await readFile(path.join(root, 'portfolio.css'), 'utf8');
+  const explorer = await readFile(path.join(root, 'kurb-explorer.js'), 'utf8');
+  const mobile = html.match(/<g class="kurb-mobile-collection"[\s\S]*?<g class="kurb-mobile-vectors"/)?.[0] || '';
+  for (const vendor of ['eBay','Depop','Mercari (JP)','Kindal','HULA','Tradera','Grailed','Vestiaire','Bunjang','Rakuten','ALLU','Feelway']) assert.ok(mobile.includes('>'+vendor+'</text>'));
+  assert.equal((html.match(/data-mobile-garment="/g) || []).length, 4);
+  assert.equal((html.match(/data-mobile-match="/g) || []).length, 2);
+  assert.match(explorer, /mobile \? '0 0 480 600' : '0 0 1100 720'/);
+  assert.match(explorer, /renderMobileCollection\(elapsed, still\)/);
+  assert.match(explorer, /renderMobileSimilarity\(elapsed, still\)/);
+  assert.match(css, /aspect-ratio: 480 \/ 600/);
+});

@@ -1,32 +1,105 @@
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const ease = 'cubic-bezier(.16,1,.3,1)';
 
+// Roll each digit independently while preserving the final text and layout.
 const kurbFacts = document.querySelector('.kurb-facts');
+function rollCounter(node, index) {
+  const finalValue = new Intl.NumberFormat('en').format(Number(node.dataset.countTo));
+  if (reducedMotion.matches || typeof node.animate !== 'function') return;
+  const reels = document.createDocumentFragment();
+  const animations = [];
+  const strips = [];
+  let digitIndex = 0;
+  for (const char of finalValue) {
+    if (!/^[0-9]$/.test(char)) {
+      const separator = document.createElement('span');
+      separator.textContent = char;
+      reels.append(separator);
+      continue;
+    }
+    const digit = Number(char);
+    const steps = 10 + digit;
+    const reel = document.createElement('span');
+    reel.className = 'counter-reel';
+    const strip = document.createElement('span');
+    strip.className = 'counter-reel__strip';
+    for (let n = 0; n <= steps; n++) {
+      const cell = document.createElement('span');
+      cell.textContent = String(n % 10);
+      strip.append(cell);
+    }
+    reel.append(strip);
+    reels.append(reel);
+    strips.push({strip, steps, digitIndex: digitIndex++});
+  }
+  node.classList.add('counter-rolling');
+  node.replaceChildren(reels);
+  for (const {strip, steps, digitIndex} of strips) {
+    // Every reel stops on the exact final digit, without changing its width.
+    animations.push(strip.animate([
+      {transform:'translateY(0)'},
+      {transform:`translateY(-${steps * 1.12}em)`}
+    ], {
+      duration: 820 + digitIndex * 75,
+      delay: index * 65 + digitIndex * 25,
+      easing: 'cubic-bezier(.12,.66,.14,1)',
+      fill: 'both'
+    }));
+  }
+  let finished = false;
+  function finish() {
+    if (finished) return;
+    finished = true;
+    reducedMotion.removeEventListener('change', onMotionChange);
+    animations.forEach(animation => animation.cancel());
+    node.classList.remove('counter-rolling');
+    node.textContent = finalValue;
+  }
+  function onMotionChange(event) {
+    if (event.matches) finish();
+  }
+  reducedMotion.addEventListener('change', onMotionChange);
+  Promise.allSettled(animations.map(animation => animation.finished)).then(finish);
+}
+
 if (kurbFacts && !reducedMotion.matches && 'IntersectionObserver' in window) {
   const observer = new IntersectionObserver(entries => {
     if (!entries.some(entry => entry.isIntersecting)) return;
     observer.disconnect();
     if (reducedMotion.matches) return;
-
-    const counters = [...kurbFacts.querySelectorAll('[data-count-to]')].map(node => ({
-      node,
-      target: Number(node.dataset.countTo)
-    }));
-    const formatter = new Intl.NumberFormat('en');
-    let start;
-    function tick(now) {
-      start ??= now;
-      const progress = reducedMotion.matches ? 1 : Math.min((now - start) / 900, 1);
-      const eased = 1 - (1 - progress) ** 2;
-      for (const {node, target} of counters) {
-        const value = formatter.format(Math.floor(target * eased));
-        if (node.textContent !== value) node.textContent = value;
-      }
-      if (progress < 1) requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
+    [...kurbFacts.querySelectorAll('[data-count-to]')].forEach(rollCounter);
   }, {threshold:.25});
   observer.observe(kurbFacts);
+}
+
+// Reveal reading sections once, without ever hiding content before JS runs.
+if (!reducedMotion.matches && 'IntersectionObserver' in window) {
+  const targets = document.querySelectorAll(
+    '.about-bio, .credentials, .personal-repo, .adopted-bots, .more-work .section-heading, .work-index, .contact-email'
+  );
+  const reveals = new Set();
+  const observer = new IntersectionObserver(entries => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      observer.unobserve(entry.target);
+      if (reducedMotion.matches || !entry.target.animate) continue;
+      const animation = entry.target.animate([
+        { opacity: .55, transform: 'translateY(12px)' },
+        { opacity: 1, transform: 'translateY(0)' }
+      ], { duration: 420, easing: ease });
+      reveals.add(animation);
+      animation.finished.catch(() => {}).finally(() => reveals.delete(animation));
+    }
+  }, { threshold: .04 });
+  targets.forEach(target => {
+    // Skip content already on screen on initial load or direct anchor navigation.
+    if (target.getBoundingClientRect().top >= innerHeight) observer.observe(target);
+  });
+  reducedMotion.addEventListener('change', event => {
+    if (!event.matches) return;
+    observer.disconnect();
+    reveals.forEach(animation => animation.cancel());
+  });
 }
 
 function imageRect(img) {

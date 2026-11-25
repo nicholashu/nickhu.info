@@ -23,7 +23,7 @@ const DELIVERY_CYCLE = DELIVERY_INTERVAL * deliveries.length;
 const SIMILARITY_CYCLE = 4800;
 const FRAME_INTERVAL = 1000 / 30;
 
-export function mountKurbExplorer(root) {
+export function mountKurbExplorer(root, { resize = update => update() } = {}) {
   if (!root) return null;
   const diagram = root.querySelector('.kurb-diagram');
   const result = root.querySelector('.kurb-result');
@@ -38,10 +38,19 @@ export function mountKurbExplorer(root) {
   const garments = [...root.querySelectorAll('[data-garment]')];
   const vectorPaths = [...root.querySelectorAll('[data-vector-path]')];
   const neighbours = root.querySelector('.kurb-neighbour-links');
-  const neighbourDots = [...root.querySelectorAll('.kurb-neighbour')];
+  const neighbourDots = [...vectors.querySelectorAll('.kurb-neighbour')];
   const matches = [...root.querySelectorAll('[data-match]')];
   const resultLink = result.querySelector('a');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const compact = matchMedia('(max-width: 520px)');
+  const mobileCollection = root.querySelector('.kurb-mobile-collection');
+  const mobileVectors = root.querySelector('.kurb-mobile-vectors');
+  const mobilePaths = [...root.querySelectorAll('[data-mobile-flow]')];
+  const mobileGarments = [...root.querySelectorAll('[data-mobile-garment]')];
+  const mobileVectorPaths = [...root.querySelectorAll('[data-mobile-vector]')];
+  const mobileNeighbours = root.querySelector('[data-mobile-neighbour-links]');
+  const mobileDots = [...root.querySelectorAll('.kurb-mobile-vectors .kurb-neighbour')];
+  const mobileMatches = [...root.querySelectorAll('[data-mobile-match]')];
   let selected = 'product';
   let frame = 0;
   let elapsed = 0;
@@ -133,13 +142,76 @@ export function mountKurbExplorer(root) {
     });
   }
 
+  function renderMobileCollection(time, still) {
+    const starts = [80,190,290,400];
+    mobilePaths.forEach((path, i) => {
+      const age = ((time - i * DELIVERY_INTERVAL) % DELIVERY_CYCLE + DELIVERY_CYCLE) % DELIVERY_CYCLE;
+      const local = age / DELIVERY_DURATION;
+      const active = age < DELIVERY_DURATION;
+      const travel = still ? .36 : between(local, .04, .88);
+      const alpha = still ? 1 : between(local, 0, .06) * (1 - between(local, .84, 1));
+      path.style.strokeDashoffset = still ? '0' : (1 - travel).toFixed(3);
+      opacity(path, still ? .55 : active ? alpha : 0);
+      const garment = mobileGarments[i];
+      if (!garment) return;
+      const x = lerp(starts[i], 240, travel * travel);
+      const y = lerp(245, 415, travel);
+      placeGarment(garment, x, y, lerp(i % 2 ? 8 : -8, 0, travel), lerp(.63, .35, travel));
+      opacity(garment, still || active ? alpha : 0);
+    });
+  }
+
+  function renderMobileSimilarity(time, still) {
+    const phase = (time % SIMILARITY_CYCLE) / SIMILARITY_CYCLE;
+    const finish = still ? 1 : 1 - between(phase, .89, 1);
+    const starts = [.035, .29, .47];
+    const ends = [.23, .41, .59];
+    mobileVectorPaths.forEach((path, i) => {
+      const reveal = still ? 1 : between(phase, starts[i], ends[i]);
+      path.style.strokeDashoffset = (1 - reveal).toFixed(3);
+      opacity(path, finish);
+    });
+    const neighbourhood = still ? 1 : between(phase, .19, .32) * finish;
+    if (mobileNeighbours) {
+      mobileNeighbours.style.strokeDashoffset = (1 - neighbourhood).toFixed(3);
+      opacity(mobileNeighbours, neighbourhood);
+    }
+    mobileDots.forEach(node => opacity(node, .35 + .65 * neighbourhood));
+    mobileMatches.forEach((node, i) => {
+      const reveal = still ? 1 : between(phase, i === 0 ? .35 : .53, i === 0 ? .46 : .64);
+      node.setAttribute('transform', `translate(${i === 0 ? 63 : 283} ${(335 + (1-reveal)*12).toFixed(2)}) scale(1.02)`);
+      opacity(node, reveal * finish);
+    });
+  }
+
+  function updateLayout() {
+    const mobile = compact.matches && mobileCollection && mobileVectors;
+    diagram.dataset.layout = mobile ? 'mobile' : 'desktop';
+    diagram.setAttribute('viewBox', mobile ? '0 0 480 600' : '0 0 1100 720');
+  }
+
+  function onLayoutChange() {
+    updateLayout();
+    render(reduced.matches || !inViewport());
+    reconcile();
+  }
+
   function render(still = false) {
     const product = selected === 'product';
     opacity(diagram, product ? 0 : 1);
     opacity(result, product ? 1 : 0);
     result.style.transform = 'none';
-    if (selected === 'collection') renderCollection(elapsed, still);
-    if (selected === 'similarity') renderSimilarity(elapsed, still);
+    const mobile = diagram.dataset.layout === 'mobile';
+    opacity(mobileCollection, selected === 'collection' ? 1 : 0);
+    opacity(mobileVectors, selected === 'similarity' ? 1 : 0);
+    if (selected === 'collection') {
+      if (mobile) renderMobileCollection(elapsed, still);
+      else renderCollection(elapsed, still);
+    }
+    if (selected === 'similarity') {
+      if (mobile) renderMobileSimilarity(elapsed, still);
+      else renderSimilarity(elapsed, still);
+    }
     updateResultInteraction();
   }
 
@@ -179,18 +251,23 @@ export function mountKurbExplorer(root) {
 
   function select(view) {
     if (!Object.hasOwn(views, view)) return;
+    const changed = selected !== view;
     stop();
-    selected = view;
-    elapsed = 0;
-    root.dataset.kurbView = view;
-    buttons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.kurbView === view)));
-    captions.forEach(caption => { caption.textContent = views[view]; });
-    render(reduced.matches || !inViewport());
-    reconcile();
+    resize(() => {
+      selected = view;
+      elapsed = 0;
+      root.dataset.kurbView = view;
+      buttons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.kurbView === view)));
+      captions.forEach(caption => { caption.textContent = views[view]; });
+      render(reduced.matches || !inViewport());
+      reconcile();
+    }, changed && !panelHidden());
   }
   function onClick(event) { select(event.currentTarget.dataset.kurbView); }
 
-  [...paths, ...vectorPaths, neighbours].filter(Boolean).forEach(path => { path.style.strokeDasharray = '1'; });
+  [...paths, ...vectorPaths, neighbours, ...mobilePaths, ...mobileVectorPaths, mobileNeighbours].filter(Boolean).forEach(path => { path.style.strokeDasharray = '1'; });
+  updateLayout();
+  compact.addEventListener('change', onLayoutChange);
   root.classList.add('scene-enhanced');
   buttons.forEach(button => button.addEventListener('click', onClick));
   document.addEventListener('projectchange', reconcile);
@@ -217,6 +294,7 @@ export function mountKurbExplorer(root) {
       document.removeEventListener('projectchange', reconcile);
       document.removeEventListener('visibilitychange', reconcile);
       reduced.removeEventListener('change', reconcile);
+      compact.removeEventListener('change', onLayoutChange);
       removeEventListener('scroll', reconcile);
       removeEventListener('resize', reconcile);
     }
