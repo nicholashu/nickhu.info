@@ -75,3 +75,21 @@ test('micro-interactions preserve the static heading, final statistics and reduc
     assert.ok(html.includes(`data-count-to="${target}"`));
   }
 });
+
+
+test('scroll reveals, project tints, accessible bot reactions and contact underline', async () => {
+  const css = await readFile(path.join(root, 'portfolio.css'), 'utf8');
+  const main = await readFile(path.join(root, 'main.js'), 'utf8');
+  const bots = await readFile(path.join(root, 'bot-gallery.js'), 'utf8');
+  assert.equal((html.match(/class="bot-trigger"/g) || []).length, 10);
+  assert.equal((html.match(/aria-label="Animate [^"]+"/g) || []).length, 10);
+  assert.match(bots, /button\.addEventListener\('click', \(\) => react\(button\)\)/);
+  assert.match(bots, /if \(preference\.matches \|\| !sprite\.animate\) return;/);
+  assert.match(main, /observer\.unobserve\(entry\.target\)/);
+  assert.match(main, /target\.getBoundingClientRect\(\)\.top >= innerHeight/);
+  assert.match(css, /--project-accent: #454979/);
+  assert.match(css, /--project-accent: #765922/);
+  assert.match(css, /--project-accent: #28614f/);
+  assert.match(css, /\.contact-email:hover \.email-address::after/);
+  assert.match(css, /@keyframes contact-spectrum/);
+});

@@ -72,6 +72,36 @@ if (kurbFacts && !reducedMotion.matches && 'IntersectionObserver' in window) {
   observer.observe(kurbFacts);
 }
 
+// Reveal reading sections once, without ever hiding content before JS runs.
+if (!reducedMotion.matches && 'IntersectionObserver' in window) {
+  const targets = document.querySelectorAll(
+    '.about-bio, .credentials, .personal-repo, .adopted-bots, .more-work .section-heading, .work-index, .contact-email'
+  );
+  const reveals = new Set();
+  const observer = new IntersectionObserver(entries => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      observer.unobserve(entry.target);
+      if (reducedMotion.matches || !entry.target.animate) continue;
+      const animation = entry.target.animate([
+        { opacity: .55, transform: 'translateY(12px)' },
+        { opacity: 1, transform: 'translateY(0)' }
+      ], { duration: 420, easing: ease });
+      reveals.add(animation);
+      animation.finished.catch(() => {}).finally(() => reveals.delete(animation));
+    }
+  }, { threshold: .04 });
+  targets.forEach(target => {
+    // Skip content already on screen on initial load or direct anchor navigation.
+    if (target.getBoundingClientRect().top >= innerHeight) observer.observe(target);
+  });
+  reducedMotion.addEventListener('change', event => {
+    if (!event.matches) return;
+    observer.disconnect();
+    reveals.forEach(animation => animation.cancel());
+  });
+}
+
 function imageRect(img) {
   const rect = img.getBoundingClientRect();
   if (getComputedStyle(img).objectFit !== 'contain' || !img.naturalWidth) return rect;
