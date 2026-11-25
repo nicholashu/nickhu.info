@@ -21,10 +21,28 @@ function revealImage(node, animate = true) {
   });
 }
 
+function revealProject(panel, direction, animate) {
+  for (const item of panels) animations.get(item)?.cancel();
+  if (!animate || reduced.matches || !panel.animate) return;
+  const offset = compact.matches
+    ? `translateX(${direction * 12}px)`
+    : `translateY(${direction * 10}px)`;
+  const animation = panel.animate([
+    { opacity: .58, transform: offset },
+    { opacity: 1, transform: 'translate(0, 0)' }
+  ], { duration: 260, easing: 'cubic-bezier(.22,.78,.25,1)' });
+  animations.set(panel, animation);
+  animation.finished.catch(() => {}).finally(() => {
+    if (animations.get(panel) === animation) animations.delete(panel);
+  });
+}
+
 function selectProject(id, {animate = true, updateHash = false} = {}) {
   const next = panels.find(panel => panel.id === id);
   if (!next) return;
+  const previous = panels.find(panel => !panel.hidden);
   const changed = next.hidden;
+  const direction = panels.indexOf(next) > panels.indexOf(previous) ? 1 : -1;
   for (const panel of panels) panel.hidden = panel !== next;
   for (const tab of tabs) {
     const selected = tab.dataset.projectTab === id;
@@ -32,7 +50,7 @@ function selectProject(id, {animate = true, updateHash = false} = {}) {
     tab.tabIndex = selected ? 0 : -1;
   }
   document.dispatchEvent(new CustomEvent('projectchange', {detail:{id}}));
-  if (changed) revealImage(next.querySelector('.preview-stage'), animate);
+  if (changed) revealProject(next, direction, animate);
   if (updateHash) history.replaceState(null, '', `#${id}`);
 }
 

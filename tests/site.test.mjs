@@ -58,3 +58,20 @@ test('sliding selection follows the existing accessible navigation state', async
   assert.match(styles, /translateY\(calc\(var\(--active-index\)/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*?\.view-switch::before,[\s\S]*?transition: none/);
 });
+
+
+test('micro-interactions preserve the static heading, final statistics and reduced motion', async () => {
+  const css = await readFile(path.join(root, 'portfolio.css'), 'utf8');
+  const browser = await readFile(path.join(root, 'project-browser.js'), 'utf8');
+  const main = await readFile(path.join(root, 'main.js'), 'utf8');
+  assert.match(html, /<h1 id="intro-title"><span class="hero-line">Software &amp;<\/span> <span class="hero-line">applied AI\.<\/span><\/h1>/);
+  assert.match(css, /@media \(prefers-reduced-motion: no-preference\) \{\s*\.hero-line/);
+  assert.match(css, /\.portrait-frame:hover img/);
+  assert.match(browser, /revealProject\(next, direction, animate\)/);
+  assert.match(browser, /if \(!animate \|\| reduced\.matches \|\| !panel\.animate\) return;/);
+  assert.match(main, /node\.textContent = finalValue/);
+  assert.match(main, /reducedMotion\.addEventListener\('change', onMotionChange\)/);
+  for (const target of [46,1000,4,100]) {
+    assert.ok(html.includes(`data-count-to="${target}"`));
+  }
+});
