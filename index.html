@@ -98,16 +98,24 @@
         <aside class="project-index">
           <h2>Selected work</h2>
           <div class="project-tabs" data-project-tabs="" role="tablist" aria-label="Selected projects" aria-orientation="horizontal">
-            <a class="project-tab" href="#kurb" data-project-tab="kurb" id="tab-kurb" role="tab" aria-controls="kurb" aria-selected="true" tabindex="0"><span class="project-name">Fashion search</span><span class="project-category">KURB</span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"></path></svg></a>
-            <a class="project-tab" href="#creaitor" data-project-tab="creaitor" id="tab-creaitor" role="tab" aria-controls="creaitor" aria-selected="false" tabindex="-1"><span class="project-name">AI learning resources</span><span class="project-category">CreAItor</span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"></path></svg></a>
-            <a class="project-tab" href="#agents" data-project-tab="agents" id="tab-agents" role="tab" aria-controls="agents" aria-selected="false" tabindex="-1"><span class="project-name">Designer-first</span><span class="project-category">Coding agent workflow</span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"></path></svg></a>
+            <a class="project-tab" href="#kurb" data-project-tab="kurb" id="tab-kurb" role="tab" aria-controls="kurb" aria-selected="true" tabindex="0"><span class="project-name">KURB</span><span class="project-category">Fashion search</span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"></path></svg></a>
+            <a class="project-tab" href="#creaitor" data-project-tab="creaitor" id="tab-creaitor" role="tab" aria-controls="creaitor" aria-selected="false" tabindex="-1"><span class="project-name">CreAItor</span><span class="project-category">AI resources</span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"></path></svg></a>
+            <a class="project-tab" href="#agents" data-project-tab="agents" id="tab-agents" role="tab" aria-controls="agents" aria-selected="false" tabindex="-1"><span class="project-name">Agents</span><span class="project-category">Coding agents</span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"></path></svg></a>
           </div>
           <div class="index-note"><p>Search infrastructure. <br>AI generation and evaluation. <br>Tools for coding agents.</p></div>
         </aside>
         <div class="project-panels">
           <article class="project-panel scene-enhanced" id="kurb" data-project-panel="" aria-labelledby="tab-kurb" role="tabpanel" data-kurb-animating="false" data-kurb-view="product">
-            <div class="preview-toolbar"><h3 id="kurb-title">KURB</h3><div class="view-switch" aria-label="KURB preview" data-enhance-only=""><button type="button" data-kurb-view="product" aria-pressed="true">Product</button><button type="button" data-kurb-view="collection" aria-pressed="false">Collection</button><button type="button" data-kurb-view="similarity" aria-pressed="false">Similarity</button></div></div>
-            <div class="preview-stage kurb-visual">
+            <div class="preview-toolbar kurb-toolbar">
+              <h3 id="kurb-title">KURB</h3>
+              <div class="view-switch kurb-view-switch" role="group" aria-label="Explore KURB" data-enhance-only="">
+                <button type="button" data-kurb-view="product" aria-controls="kurb-preview" aria-pressed="true">Search UI</button>
+                <button type="button" data-kurb-view="collection" aria-controls="kurb-preview" aria-pressed="false">Data collection</button>
+                <button type="button" data-kurb-view="similarity" aria-controls="kurb-preview" aria-pressed="false">Image similarity</button>
+              </div>
+            </div>
+            <p class="preview-caption kurb-view-caption" data-kurb-caption="" aria-live="polite" aria-atomic="true">Search second-hand fashion across vendors. Live product capture, November 2026.</p>
+            <div class="preview-stage kurb-visual" id="kurb-preview">
               <svg class="kurb-diagram" viewBox="0 0 1100 720" fill="none" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" style="opacity: 0;">
 <defs>
             <clipPath id="kurb-garment-clip"><rect width="134" height="178" rx="7"></rect></clipPath>
@@ -150,13 +158,13 @@
   <g class="kurb-match" data-match="1" transform="translate(873 341) rotate(-5 67 89)"><use href="#kurb-cream-trousers"></use></g>
   <g class="kurb-query-caption"><rect class="kurb-caption-surface" x="58" y="398" width="216" height="64" rx="13"></rect><text class="kurb-vector-label" x="166" y="440" text-anchor="middle">Query image</text></g>
   <g class="kurb-embedding-caption"><rect class="kurb-caption-surface" x="320" y="493" width="470" height="120" rx="16"></rect><text class="kurb-vector-label" x="555" y="539" text-anchor="middle">Image embeddings</text><text class="kurb-vector-sub" x="555" y="580" text-anchor="middle">Visual similarity in vector space</text></g>
+  <g class="kurb-match-caption"><rect class="kurb-caption-surface" x="820" y="549" width="240" height="64" rx="13"></rect><text class="kurb-vector-label" x="940" y="591" text-anchor="middle">Matches</text></g>
 </g>
 </svg>
               <figure class="kurb-result" aria-hidden="false" style="opacity: 1; transform: none; pointer-events: auto;">
                 <a class="image-link" href="./assets/kurb-product-clean.jpg" data-lightbox="" data-caption="KURB's live search interface, captured November 2026." aria-label="Enlarge the KURB search screenshot" tabindex="0"><img src="./assets/kurb-product-clean.jpg" alt="KURB fashion search with Rick Owens garments and brand, price and vendor filters." width="1363" height="936" fetchpriority="high"><span class="image-enlarge">Enlarge</span></a>
               </figure>
             </div>
-            <p class="preview-caption" data-kurb-caption="">KURB's live search interface, captured November 2026.</p>
             <div class="project-description">
               <div class="project-facts kurb-facts" aria-label="KURB scale">
                 <p><strong aria-hidden="true"><span data-count-to="46">46</span>M+</strong><span class="fact-value">46 million plus</span><span class="fact-label">live listings</span></p>
@@ -288,7 +296,7 @@
             </div>
           </article>
           <article class="project-panel" id="agents" data-project-panel="" aria-labelledby="tab-agents" role="tabpanel" hidden="">
-            <div class="preview-toolbar"><h3 id="agents-title">Designer-first</h3><div class="view-switch" aria-label="Designer-first preview" data-enhance-only=""><button type="button" data-media-view="website" aria-pressed="true">Website</button><button type="button" data-media-view="workflow" aria-pressed="false">Workflow</button></div></div>
+            <div class="preview-toolbar"><h3 id="agents-title">Designer-first</h3><div class="view-switch" role="group" aria-label="Designer-first preview" data-enhance-only=""><button type="button" data-media-view="website" aria-pressed="true">Website</button><button type="button" data-media-view="workflow" aria-pressed="false">Workflow</button></div></div>
             <div class="preview-stage designer-visual">
               <figure class="media-view" data-media="website"><a class="image-link" href="./assets/airteam-home-public.jpg" data-lightbox="" data-caption="airteam.com.au, a public website capture. Used to illustrate the designer-first development workflow." aria-label="Enlarge the Airteam website capture"><img src="./assets/airteam-home-public.jpg" alt="Airteam’s website showing the headline Complex software, made human and its floating anvil illustration." width="1348" height="926" loading="lazy"><span class="image-enlarge">Enlarge</span></a></figure>
               <div class="media-view workflow-view" data-media="workflow" hidden=""><div class="workflow-context"><span>Sanity request</span><span>Figma context</span><span>Codebase</span></div><div class="workflow-route" aria-hidden="true"></div><div class="workflow-artifact"><img src="./assets/airteam-home-public.jpg" alt="" width="1348" height="926" loading="lazy"><div><strong>Reviewable implementation</strong><p>Pull request in agent chat<br>Checks and preview</p></div></div><div class="workflow-route short" aria-hidden="true"></div><p class="review-gate">Human approval before release</p></div>
