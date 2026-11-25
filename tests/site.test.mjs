@@ -66,7 +66,7 @@ test('micro-interactions preserve the static heading, final statistics and reduc
   const main = await readFile(path.join(root, 'main.js'), 'utf8');
   assert.match(html, /<h1 id="intro-title"><span class="hero-line">Software &amp;<\/span> <span class="hero-line">applied AI\.<\/span><\/h1>/);
   assert.match(css, /@media \(prefers-reduced-motion: no-preference\) \{\s*\.hero-line/);
-  assert.match(css, /\.portrait-frame:hover img/);
+  assert.doesNotMatch(css, /\.portrait-frame:(hover|active) img/);
   assert.match(browser, /revealProject\(next, direction, animate\)/);
   assert.match(browser, /if \(!animate \|\| reduced\.matches \|\| !panel\.animate\) return;/);
   assert.match(main, /node\.textContent = finalValue/);

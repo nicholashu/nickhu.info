@@ -683,27 +683,7 @@ footer{display:flex;justify-content:space-between;gap:20px;font-size:13px;font-w
     to { opacity: 1; transform: translateY(0); clip-path: inset(0 0 0 0); }
   }
 
-  .portrait-frame img {
-    transform-origin: 50% 65%;
-    transition: transform 420ms cubic-bezier(.22,.78,.25,1), filter 300ms ease;
-  }
-  .portrait-frame::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    pointer-events: none;
-    background: linear-gradient(125deg, transparent 26%, #fff8 48%, transparent 69%);
-    transform: translateX(-120%);
-    opacity: 0;
-    transition: transform 560ms cubic-bezier(.22,.78,.25,1), opacity 180ms ease;
-  }
-  .portrait-frame:active img { transform: scale(1.07); filter: contrast(1.08); }
-  .portrait-frame:active::after { transform: translateX(120%); opacity: .65; }
-  @media (hover: hover) and (pointer: fine) {
-    .portrait-frame:hover img { transform: scale(1.07); filter: contrast(1.08); }
-    .portrait-frame:hover::after { transform: translateX(120%); opacity: .65; }
-  }
+
 }
 .counter-rolling {
   display: inline-flex;
