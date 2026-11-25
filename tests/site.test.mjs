@@ -31,3 +31,20 @@ test('JavaScript syntax and complete media manifest',()=>{
   assert.equal(assets.filter(p=>p.endsWith('.gif')).length,10);
   assert.ok(assets.some(p=>p.endsWith('.woff2')));
 });
+
+test('project and KURB preview navigation have distinct labels and accessible controls', async () => {
+  const tabs = [...html.matchAll(/data-project-tab="([^"]+)"[^>]*><span class="project-name">([^<]+)<\/span>/g)];
+  assert.deepEqual(tabs.map(([,id,label]) => [id,label]), [
+    ['kurb','KURB'], ['creaitor','CreAItor'], ['agents','Agents']
+  ]);
+  const controls = [...html.matchAll(/data-kurb-view="([^"]+)" aria-controls="kurb-preview" aria-pressed="([^"]+)">([^<]+)<\/button>/g)];
+  assert.deepEqual(controls.map(([,id,pressed,label]) => [id,pressed,label]), [
+    ['product','true','Search UI'], ['collection','false','Data collection'], ['similarity','false','Image similarity']
+  ]);
+  assert.equal((html.match(/data-kurb-caption=/g) || []).length, 1);
+  assert.match(html, /data-kurb-caption="" aria-live="polite" aria-atomic="true"/);
+  assert.ok(html.indexOf('data-kurb-caption=') < html.indexOf('id="kurb-preview"'));
+  const explorer = await readFile(path.join(root,'kurb-explorer.js'),'utf8');
+  assert.match(explorer, /captions\.forEach\(caption => \{ caption\.textContent = views\[view\]; \}\)/);
+  assert.ok(explorer.includes("Search second-hand fashion across vendors. Live product capture, November 2026."));
+});

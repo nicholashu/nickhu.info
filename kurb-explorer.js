@@ -6,9 +6,9 @@ const between = (value, from, to) => smooth((value - from) / (to - from));
 const lerp = (from, to, t) => from + (to - from) * t;
 const opacity = (node, value) => { if (node) node.style.opacity = clamp(value).toFixed(3); };
 const views = {
-  product: "KURB's live search interface, captured November 2026.",
-  collection: 'Illustrative collection flow using real product imagery.',
-  similarity: 'Illustrative image query, embeddings and similar garments.'
+  product: 'Search second-hand fashion across vendors. Live product capture, November 2026.',
+  collection: 'Listings from different vendors are collected and normalised into one searchable catalogue. Illustrative flow.',
+  similarity: 'Image embeddings connect a query garment to visually similar listings across vendors. Illustrative flow.'
 };
 // Staggered routes keep two or three garments in flight without moving as one batch.
 const deliveries = [
