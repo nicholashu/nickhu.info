@@ -48,3 +48,13 @@ test('project and KURB preview navigation have distinct labels and accessible co
   assert.match(explorer, /captions\.forEach\(caption => \{ caption\.textContent = views\[view\]; \}\)/);
   assert.ok(explorer.includes("Search second-hand fashion across vendors. Live product capture, November 2026."));
 });
+
+test('sliding selection follows the existing accessible navigation state', async () => {
+  const styles = await readFile(path.join(root, 'portfolio.css'), 'utf8');
+  assert.match(styles, /\.project-tabs:has\(> :nth-child\(2\)\[aria-selected="true"\]\)/);
+  assert.match(styles, /\.view-switch:has\(> :nth-child\(3\)\[aria-pressed="true"\]\)/);
+  assert.match(styles, /transition: transform 280ms/);
+  assert.match(styles, /translateX\(calc\(var\(--active-index\)/);
+  assert.match(styles, /translateY\(calc\(var\(--active-index\)/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*?\.view-switch::before,[\s\S]*?transition: none/);
+});
