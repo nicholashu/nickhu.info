@@ -712,60 +712,8 @@ footer{display:flex;justify-content:space-between;gap:20px;font-size:13px;font-w
 }
 
 
-/* Project accents: a quiet tint, a readable dark active control, unchanged media. */
+/* Role-specific bot reactions. */
 @media screen {
-  .project-tabs, .project-panel {
-    --project-accent: #454979;
-    --project-tint: #eeeef7;
-    --project-edge: #c7c9df;
-    --project-stage: #e7e8ef;
-  }
-  #creaitor {
-    --project-accent: #765922;
-    --project-tint: #f6efdf;
-    --project-edge: #dfcfa9;
-    --project-stage: #eee9dc;
-  }
-  #agents {
-    --project-accent: #28614f;
-    --project-tint: #e5f1e9;
-    --project-edge: #b7d3c2;
-    --project-stage: #e2ece6;
-  }
-  .project-panel .preview-stage,
-  .project-panel .worksheet-stack,
-  .project-panel .workflow-view { background: var(--project-stage); }
-  .project-panel .preview-stage { box-shadow: inset 0 0 0 1px var(--project-edge); }
-  .project-panel .view-switch {
-    background: var(--project-tint);
-    border-color: var(--project-edge);
-  }
-  .project-panel .view-switch button[aria-pressed="true"] {
-    background: var(--project-accent);
-    color: #fff;
-  }
-  .project-panel .project-facts strong { color: var(--project-accent); }
-  .project-tab[aria-selected="true"] .project-name { color: var(--project-accent, var(--ink)); }
-  @supports selector(:has(*)) {
-    .project-tabs:has(> [data-project-tab="creaitor"][aria-selected="true"]) {
-      --project-accent: #765922;
-      --project-tint: #f6efdf;
-      --project-edge: #dfcfa9;
-    }
-    .project-tabs:has(> [data-project-tab="agents"][aria-selected="true"]) {
-      --project-accent: #28614f;
-      --project-tint: #e5f1e9;
-      --project-edge: #b7d3c2;
-    }
-    .project-browser-ready .project-tabs::after {
-      background: var(--project-tint);
-      border-color: var(--project-edge);
-      transition: transform 280ms cubic-bezier(.22,.78,.25,1), background-color 280ms ease, border-color 280ms ease;
-    }
-    .project-browser-ready .project-panel .view-switch::before { background: var(--project-accent); }
-    .project-browser-ready .project-panel .view-switch button[aria-pressed="true"] { background: transparent; }
-  }
-
   /* Each existing role-specific GIF remains the sprite; the button adds a small reaction. */
   .bot-trigger {
     appearance: none;
@@ -785,51 +733,10 @@ footer{display:flex;justify-content:space-between;gap:20px;font-size:13px;font-w
   .bot-trigger.bot-reacting, .bot-trigger:focus-visible { background: #e0e8d8; }
   .bot-trigger:focus-visible { outline-offset: 2px; border-radius: 10px; }
 
-  /* Iridescent contact underline, sized to the email address rather than the page. */
-  .contact-email .email-address {
-    position: relative;
-    width: fit-content;
-    max-width: 100%;
-    padding-bottom: 6px;
-    text-decoration: none;
-  }
-  .contact-email .email-address::after {
-    content: "";
-    position: absolute;
-    inset: auto 0 0;
-    height: 3px;
-    border-radius: 2px;
-    background: linear-gradient(95deg, #626c9a, #438d80, #9caa59, #c4996a, #7772a3, #438d80);
-    background-size: 200% 100%;
-    transform: scaleX(0);
-    transform-origin: left center;
-    pointer-events: none;
-  }
-  .contact-email:focus-visible .email-address::after,
-  .contact-email:active .email-address::after { transform: scaleX(1); }
 }
 @media screen and (hover: hover) {
   .bot-trigger:hover { background: #e0e8d8; }
-  .contact-email:hover .email-address { text-decoration: none; }
-  .contact-email:hover .email-address::after { transform: scaleX(1); }
 }
 @media (prefers-reduced-motion: no-preference) {
   .bot-trigger { transition: background-color 180ms ease; }
-  .contact-email .email-address::after {
-    transition: transform 360ms cubic-bezier(.22,.78,.25,1);
-  }
-  .contact-email:focus-visible .email-address::after,
-  .contact-email:active .email-address::after {
-    animation: contact-spectrum 1.25s ease both;
-  }
-  @media (hover: hover) {
-    .contact-email:hover .email-address::after { animation: contact-spectrum 1.25s ease both; }
-  }
-  @keyframes contact-spectrum {
-    from { background-position: 0% 50%; }
-    to { background-position: 100% 50%; }
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .project-browser-ready .project-tabs::after { transition: none; }
 }

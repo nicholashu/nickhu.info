@@ -77,7 +77,7 @@ test('micro-interactions preserve the static heading, final statistics and reduc
 });
 
 
-test('scroll reveals, project tints, accessible bot reactions and contact underline', async () => {
+test('scroll reveals and accessible bot reactions without extra project or contact effects', async () => {
   const css = await readFile(path.join(root, 'portfolio.css'), 'utf8');
   const main = await readFile(path.join(root, 'main.js'), 'utf8');
   const bots = await readFile(path.join(root, 'bot-gallery.js'), 'utf8');
@@ -87,9 +87,7 @@ test('scroll reveals, project tints, accessible bot reactions and contact underl
   assert.match(bots, /if \(preference\.matches \|\| !sprite\.animate\) return;/);
   assert.match(main, /observer\.unobserve\(entry\.target\)/);
   assert.match(main, /target\.getBoundingClientRect\(\)\.top >= innerHeight/);
-  assert.match(css, /--project-accent: #454979/);
-  assert.match(css, /--project-accent: #765922/);
-  assert.match(css, /--project-accent: #28614f/);
-  assert.match(css, /\.contact-email:hover \.email-address::after/);
-  assert.match(css, /@keyframes contact-spectrum/);
+  assert.doesNotMatch(css, /--project-accent:/);
+  assert.doesNotMatch(css, /@keyframes contact-spectrum/);
+  assert.match(css, /\.bot-trigger\.bot-reacting/);
 });
